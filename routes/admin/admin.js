@@ -27,131 +27,171 @@ router.use((req, res, next) => {
 });
 
 // Dashboard
-router.get("/", (req, res) => {
-  const authData = functions.isUserAuthenticated(req.user);
-  const resCount = resourceAPI.countAll();
-  const orderCount = orderAPI.countByStatus();
-  const commentCount = commentAPI.countAll();
-  const userCount = userAPI.listUsers().length;
+router.get("/", async (req, res) => {
+  try {
+    const authData = functions.isUserAuthenticated(req.user);
+    const [resCount, orderCount, commentCount, users] = await Promise.all([
+      resourceAPI.countAll(),
+      orderAPI.countByStatus(),
+      commentAPI.countAll(),
+      userAPI.listUsers()
+    ]);
+    const userCount = Array.isArray(users) ? users.length : 0;
 
-  const trend = resourceAPI.getTrend(7);
-  const catCounts = resourceAPI.countByCategory();
-  const categoryPie = CATEGORIES.map(c => ({ label: c.label, value: catCounts[c.key] || 0, color: c.color }));
-  const ranking = decorateList(resourceAPI.getRanking(8));
-  const recent = decorateList(resourceAPI.listResources({ sort: 'newest' }).slice(0, 5));
-  const cacheMode = cache.getMode();
+    const [trend, catCounts, rankingArr, recentArr, todayCount] = await Promise.all([
+      resourceAPI.getTrend(7),
+      resourceAPI.countByCategory(),
+      resourceAPI.getRanking(8),
+      resourceAPI.listResources({ sort: 'newest' }),
+      resourceAPI.countToday()
+    ]);
 
-  res.render("admin/dashboard", {
-    authData, pageTitle: "管理后台 - CampusShelf",
-    stats: {
-      users: userCount,
-      resources: resCount.approved,
-      resourcesTotal: resCount.total,
-      pending: resCount.pending,
-      today: resourceAPI.countToday(),
-      orders: orderCount.total,
-      comments: commentCount
-    },
-    trend, categoryPie, ranking, recent, cacheMode
-  });
+    const categoryPie = CATEGORIES.map(c => ({ label: c.label, value: catCounts[c.key] || 0, color: c.color }));
+    const ranking = decorateList(rankingArr);
+    const recent = decorateList(recentArr.slice(0, 5));
+    const cacheMode = cache.getMode();
+
+    res.render("admin/dashboard", {
+      authData, pageTitle: "管理后台 - CampusShelf",
+      stats: {
+        users: userCount,
+        resources: resCount.approved || 0,
+        resourcesTotal: resCount.total || 0,
+        pending: resCount.pending || 0,
+        today: todayCount || 0,
+        orders: orderCount.total || 0,
+        comments: commentCount || 0
+      },
+      trend, categoryPie, ranking, recent, cacheMode
+    });
+  } catch (error) {
+    res.render("error/static", { error });
+  }
 });
 
 // Resources management (review workflow)
-router.get("/resources", (req, res) => {
-  const authData = functions.isUserAuthenticated(req.user);
-  const status = req.query.status || 'all';
-  const list = resourceAPI.listResources({ status, sort: 'newest' });
-  res.render("admin/resources", {
-    authData, pageTitle: "资源管理 - CampusShelf",
-    resources: decorateList(list),
-    status, statuses: ['all', 'pending', 'approved', 'rejected', 'sold']
-  });
+router.get("/resources", async (req, res) => {
+  try {
+    const authData = functions.isUserAuthenticated(req.user);
+    const status = req.query.status || 'all';
+    const list = await resourceAPI.listResources({ status, sort: 'newest' });
+    res.render("admin/resources", {
+      authData, pageTitle: "资源管理 - CampusShelf",
+      resources: decorateList(list),
+      status, statuses: ['all', 'pending', 'approved', 'rejected', 'sold']
+    });
+  } catch (error) {
+    res.render("error/static", { error });
+  }
 });
 
-router.post("/resources/:id/approve", (req, res) => {
-  resourceAPI.changeStatus(req.params.id, 'approved');
+router.post("/resources/:id/approve", async (req, res) => {
+  await resourceAPI.changeStatus(req.params.id, 'approved');
   cache.del('campusshelf:hot-resources').catch(() => {});
   res.redirect('/admin/resources?status=pending');
 });
-router.post("/resources/:id/reject", (req, res) => {
-  resourceAPI.changeStatus(req.params.id, 'rejected');
+router.post("/resources/:id/reject", async (req, res) => {
+  await resourceAPI.changeStatus(req.params.id, 'rejected');
   res.redirect('/admin/resources?status=pending');
 });
-router.post("/resources/:id/sold", (req, res) => {
-  resourceAPI.changeStatus(req.params.id, 'sold');
+router.post("/resources/:id/sold", async (req, res) => {
+  await resourceAPI.changeStatus(req.params.id, 'sold');
   cache.del('campusshelf:hot-resources').catch(() => {});
   res.redirect('/admin/resources?status=approved');
 });
 
 // Users management
-router.get("/users", (req, res) => {
-  const authData = functions.isUserAuthenticated(req.user);
-  const users = userAPI.listUsers().map(u => ({
-    ...u,
-    resourceCount: resourceAPI.countBySeller(u._id),
-    orderCount: orderAPI.countByUser(u._id)
-  }));
-  res.render("admin/users", {
-    authData, pageTitle: "用户管理 - CampusShelf", users
-  });
+router.get("/users", async (req, res) => {
+  try {
+    const authData = functions.isUserAuthenticated(req.user);
+    const userList = await userAPI.listUsers();
+    const users = await Promise.all((userList || []).map(async u => ({
+      ...u,
+      resourceCount: await resourceAPI.countBySeller(u.id || u._id),
+      orderCount: await orderAPI.countByUser(u.id || u._id)
+    })));
+    res.render("admin/users", {
+      authData, pageTitle: "用户管理 - CampusShelf", users
+    });
+  } catch (error) {
+    res.render("error/static", { error });
+  }
 });
 
 // Orders management
-router.get("/orders", (req, res) => {
-  const authData = functions.isUserAuthenticated(req.user);
-  const orders = orderAPI.getAll().map(decorateOrder);
-  res.render("admin/orders", {
-    authData, pageTitle: "订单管理 - CampusShelf", orders
-  });
+router.get("/orders", async (req, res) => {
+  try {
+    const authData = functions.isUserAuthenticated(req.user);
+    const ordersList = await orderAPI.getAll();
+    const orders = (ordersList || []).map(decorateOrder);
+    res.render("admin/orders", {
+      authData, pageTitle: "订单管理 - CampusShelf", orders
+    });
+  } catch (error) {
+    res.render("error/static", { error });
+  }
 });
 
-router.post("/orders/:id/status", (req, res) => {
-  orderAPI.updateStatus(req.params.id, req.body.status);
+router.post("/orders/:id/status", async (req, res) => {
+  await orderAPI.updateStatus(req.params.id, req.body.status);
   res.redirect('/admin/orders');
 });
 
 // Comments management
-router.get("/comments", (req, res) => {
-  const authData = functions.isUserAuthenticated(req.user);
-  // comments across all resources
-  const all = [];
-  const byResource = {};
-  resourceAPI.listResources({ status: 'all' }).forEach(r => {
-    commentAPI.getByResource(r.id).forEach(c => {
-      all.push(Object.assign({}, c, { resourceTitle: r.title, resourceId: r.id }));
+router.get("/comments", async (req, res) => {
+  try {
+    const authData = functions.isUserAuthenticated(req.user);
+    const resources = await resourceAPI.listResources({ status: 'all' });
+    const all = [];
+    if (resources && resources.length) {
+      for (const r of resources) {
+        const comments = await commentAPI.getByResource(r.id);
+        (comments || []).forEach(c => {
+          all.push(Object.assign({}, c, { resourceTitle: r.title, resourceId: r.id }));
+        });
+      }
+    }
+    res.render("admin/comments", {
+      authData, pageTitle: "评论管理 - CampusShelf", comments: all
     });
-  });
-  res.render("admin/comments", {
-    authData, pageTitle: "评论管理 - CampusShelf", comments: all
-  });
+  } catch (error) {
+    res.render("error/static", { error });
+  }
 });
 
 // Statistics (charts)
-router.get("/stats", (req, res) => {
-  const authData = functions.isUserAuthenticated(req.user);
-  const trend = resourceAPI.getTrend(7);
-  const catCounts = resourceAPI.countByCategory();
-  const categoryPie = CATEGORIES.map(c => ({ label: c.label, value: catCounts[c.key] || 0, color: c.color }));
-  const ranking = decorateList(resourceAPI.getRanking(10));
+router.get("/stats", async (req, res) => {
+  try {
+    const authData = functions.isUserAuthenticated(req.user);
+    const [trend, catCounts, rankingArr, ordersList] = await Promise.all([
+      resourceAPI.getTrend(7),
+      resourceAPI.countByCategory(),
+      resourceAPI.getRanking(10),
+      orderAPI.getAll()
+    ]);
+    const categoryPie = CATEGORIES.map(c => ({ label: c.label, value: catCounts[c.key] || 0, color: c.color }));
+    const ranking = decorateList(rankingArr);
 
-  // order trend (last 7 days)
-  const orderTrend = (() => {
-    const buckets = Array.from({ length: 7 }, (_, i) => {
-      const d = new Date(Date.now() - (6 - i) * 86400000);
-      return { date: d.toISOString().slice(0, 10), count: 0, amount: 0 };
-    });
-    orderAPI.getAll().forEach(o => {
-      const key = new Date(o.createdAt).toISOString().slice(0, 10);
-      const b = buckets.find(x => x.date === key);
-      if (b) { b.count++; b.amount += (o.total || 0); }
-    });
-    return buckets;
-  })();
+    const orderTrend = (() => {
+      const buckets = Array.from({ length: 7 }, (_, i) => {
+        const d = new Date(Date.now() - (6 - i) * 86400000);
+        return { date: d.toISOString().slice(0, 10), count: 0, amount: 0 };
+      });
+      (ordersList || []).forEach(o => {
+        const key = new Date(o.createdAt).toISOString().slice(0, 10);
+        const b = buckets.find(x => x.date === key);
+        if (b) { b.count++; b.amount += (o.total || 0); }
+      });
+      return buckets;
+    })();
 
-  res.render("admin/stats", {
-    authData, pageTitle: "数据统计 - CampusShelf",
-    trend, categoryPie, ranking, orderTrend
-  });
+    res.render("admin/stats", {
+      authData, pageTitle: "数据统计 - CampusShelf",
+      trend, categoryPie, ranking, orderTrend
+    });
+  } catch (error) {
+    res.render("error/static", { error });
+  }
 });
 
 module.exports = router;

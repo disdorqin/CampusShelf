@@ -20,16 +20,16 @@ router.get("/", async(req, res) => {
     const hot = await cache.cacheGet('campusshelf:hot-resources', 300, () =>
       resourceAPI.getHotResources(8)
     );
-    const all = resourceAPI.listResources({ status: 'approved', sort: 'newest' });
+    const all = await resourceAPI.listResources({ status: 'approved', sort: 'newest' });
     const latest = all.slice(0, 8);
     const free = all.filter(r => Number(r.price) === 0).slice(0, 4);
     const wanted = wantedAPI.getRecent(4);
 
-    const userCount = userAPI.listUsers().length;
+    const userCount = (await userAPI.listUsers()).length;
     const orderCount = orderAPI.countByStatus().total;
     const approvalRate = 98; // mock value
 
-    const counts = resourceAPI.countByCategory();
+    const counts = await resourceAPI.countByCategory();
     const categories = CATEGORIES.map(c => ({
       ...c,
       count: counts[c.key] || 0

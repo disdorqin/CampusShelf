@@ -6,7 +6,12 @@
   "scripts": {
     "start": "node app.js",
     "dev": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:start": "docker-compose up -d mysql redis adminer",
+    "db:stop": "docker-compose down",
+    "db:reset": "echo '⚠️  This will DELETE ALL DATA! Use with caution.' && docker-compose down -v && docker-compose up -d mysql redis adminer",
+    "db:seed": "node scripts/seed-mysql.js",
+    "db:init": "npm run db:start && node scripts/seed-mysql.js"
   },
   "repository": {
     "type": "git",
@@ -27,13 +32,15 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^17.4.2",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
     "lodash": "^4.17.21",
-    "morgan": "^1.10.0",
-    "mongodb": "^6.8.0",
     "moment": "^2.30.1",
+    "mongodb": "^6.8.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.22.5",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "uuid": "^9.0.1"

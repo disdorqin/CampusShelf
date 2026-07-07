@@ -1,17 +1,35 @@
-# CampusShelf — optional Redis service for cache optimization (Phase 6)
-# Redis is OPTIONAL. The app automatically falls back to an in-memory cache
-# when Redis is unavailable, so you can run without Docker / Redis.
-#
-# Usage:
-#   docker compose up -d        # start redis on localhost:6379
-#   docker compose down         # stop
-#
-# Then start the app normally:  npm start
 services:
+  mysql:
+    image: mysql:8.4
+    container_name: campusshelf-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - campusshelf_mysql_data:/var/lib/mysql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
   redis:
     image: redis:7
     container_name: campusshelf-redis
+    restart: unless-stopped
     ports:
       - "6379:6379"
-    command: ["redis-server", "--appendonly", "no"]
+
+  adminer:
+    image: adminer
+    container_name: campusshelf-adminer
     restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  campusshelf_mysql_data:
