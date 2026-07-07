@@ -15,8 +15,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/julio-lockhart/Bookstore.git"
+    "url": "https://github.com/disdorqin/CampusShelf.git"
   },
+  "homepage": "https://github.com/disdorqin/CampusShelf",
   "keywords": [
     "nodejs",
     "express",
