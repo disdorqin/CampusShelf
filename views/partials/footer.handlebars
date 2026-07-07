@@ -2,49 +2,48 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col">
-        <h4>🏫 CampusShelf</h4>
+        <h4>{{{icon "book-2"}}} CampusShelf</h4>
         <p class="brand-desc">
           面向大学生的校园学习资源交易与共享平台。<br>
           让每一本教材、每一份笔记找到新的主人。<br>
           知识因传递而更有价值。
         </p>
         <div class="tech-badges">
-          <span>Node.js</span>
-          <span>Express</span>
-          <span>Handlebars</span>
-          <span>Chart.js</span>
-          <span>Chart.js</span>
+          <span>{{{icon "bolt"}}} Node.js</span>
+          <span>{{{icon "bolt"}}} Express</span>
+          <span>{{{icon "settings"}}} Handlebars</span>
+          <span>{{{icon "chart-bar"}}} Chart.js</span>
         </div>
       </div>
       <div class="footer-col">
-        <h4>🔗 快捷链接</h4>
-        <a href="/resources">📦 全部资源</a>
-        <a href="/resources?sort=newest">🆕 最新上架</a>
-        <a href="/resources?sort=views">🔥 热门排行</a>
-        <a href="/resources?maxPrice=0">🎁 免费专区</a>
-        <a href="/wanted">💬 求购墙</a>
-        <a href="/resources/publish">📤 发布资源</a>
+        <h4>{{{icon "settings"}}} 快捷链接</h4>
+        <a href="/resources">{{{icon "database"}}} 全部资源</a>
+        <a href="/resources?sort=newest">{{{icon "clock"}}} 最新上架</a>
+        <a href="/resources?sort=views">{{{icon "eye"}}} 热门排行</a>
+        <a href="/resources?maxPrice=0">{{{icon "discount"}}} 免费专区</a>
+        <a href="/wanted">{{{icon "messages"}}} 求购墙</a>
+        <a href="/resources/publish">{{{icon "plus"}}} 发布资源</a>
       </div>
       <div class="footer-col">
-        <h4>📂 分类导航</h4>
+        <h4>{{{icon "category"}}} 分类导航</h4>
         {{#each categories}}
-        <a href="/resources?category={{key}}">{{icon}} {{label}}</a>
+        <a href="/resources?category={{key}}">{{{icon "book-2"}}} {{label}}</a>
         {{/each}}
       </div>
       <div class="footer-col">
-        <h4>🔒 安全提示</h4>
+        <h4>{{{icon "shield-check"}}} 安全提示</h4>
         <p>CampusShelf 仅提供信息展示平台。<br>
         建议线下交易时选择校园公共区域，<br>
         核实物品与描述一致，避免提前转账。<br>
         如有纠纷请联系校方或辅导员。</p>
         <p style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
-          <strong>👥 第 15 组 · 华东理工大学</strong><br>
+          <strong>{{{icon "users-plus"}}} 第 15 组 · 华东理工大学</strong><br>
           <span style="font-size:11px">学生实践周作品 · 基于开源 Bookstore 二次开发</span>
         </p>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2026 CampusShelf · 校园学习资源交易平台 · 让知识在校园里传递
+      &copy; 2026 CampusShelf · 校园学习资源交易平台 · {{{icon "heart"}}} 让知识在校园里传递
     </div>
   </div>
 </footer>

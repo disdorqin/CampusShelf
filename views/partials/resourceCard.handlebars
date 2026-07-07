@@ -1,33 +1,33 @@
 <div class="resource-card" data-compare-id="{{id}}" data-compare-title="{{title}}" data-compare-price="{{price}}" data-compare-img="{{coverUrl}}">
   <div class="resource-card-img">
     <img src="{{coverUrl}}" alt="{{title}}" loading="lazy">
-    <span class="resource-card-badge" style="background:{{categoryColor}}">{{categoryLabel}}</span>
-    {{#if (eq price 0)}}<span class="resource-card-free">免费</span>{{/if}}
+    <span class="resource-card-badge" style="background:{{categoryColor}}">{{{icon "book-2"}}} {{categoryLabel}}</span>
+    {{#if (eq price 0)}}<span class="resource-card-free">{{{icon "heart"}}} 免费</span>{{/if}}
   </div>
   <div class="resource-card-body">
     <div class="title"><a href="/resources/{{id}}">{{title}}</a></div>
     <div class="resource-card-meta">
-      <span>📍 {{campus}}</span>
-      <span>📖 {{courseName}}</span>
-      <span>📊 {{condition}}</span>
-      <span>👁 {{views}}</span>
-      <span>❤️ {{favoritesCount}}</span>
-      {{#if avgRating}}<span>⭐ {{avgRating}}</span>{{/if}}
+      <span>{{{icon "map-pin"}}} {{campus}}</span>
+      <span>{{{icon "book-2"}}} {{courseName}}</span>
+      <span>{{{icon "clipboard-text"}}} {{condition}}</span>
+      <span>{{{icon "eye"}}} {{views}}</span>
+      <span>{{{icon "heart"}}} {{favoritesCount}}</span>
+      {{#if avgRating}}<span>{{{icon "star"}}} {{avgRating}}</span>{{/if}}
     </div>
-    <div class="resource-card-price {{#if (eq price 0)}}free{{/if}}">{{priceText}}</div>
+    <div class="resource-card-price {{#if (eq price 0)}}free{{/if}}">{{{icon "coin"}}} {{priceText}}</div>
     {{#if tags}}
     <div class="resource-card-tags">
-      {{#each (split tags ",")}}<span class="tag">{{this}}</span>{{/each}}
+      {{#each (split tags ",")}}<span class="tag">{{{icon "tag"}}} {{this}}</span>{{/each}}
     </div>
     {{/if}}
     <div class="resource-card-footer">
       <span class="seller"><span class="avatar-mini" style="background:{{categoryColor}}">{{firstChar sellerName}}</span>{{sellerName}}</span>
       <div class="actions">
-        <label style="cursor:pointer;display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text-muted)">
-          <input type="checkbox" class="compare-cb"> 对比
+        <label class="icon-text" style="cursor:pointer;font-size:12px;color:var(--text-muted)">
+          <input type="checkbox" class="compare-cb"> {{{icon "arrows-shuffle"}}} 对比
         </label>
-        <button class="fav-btn {{#if isFavorited}}active{{/if}}" data-id="{{id}}">{{#if isFavorited}}❤️{{else}}🤍{{/if}}</button>
-        <a href="/resources/{{id}}" class="btn btn-sm btn-outline">详情</a>
+        <button class="fav-btn {{#if isFavorited}}active{{/if}}" data-id="{{id}}">{{#if isFavorited}}{{{icon "heart"}}}{{else}}{{{icon "heart"}}}{{/if}}</button>
+        <a href="/resources/{{id}}" class="btn btn-sm btn-outline">{{{icon "eye"}}} 详情</a>
       </div>
     </div>
   </div>

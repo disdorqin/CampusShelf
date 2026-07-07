@@ -5,23 +5,23 @@
       <span>CampusShelf</span>
     </a>
     <div class="header-search">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon">{{{icon "search"}}}</span>
       <input id="globalSearch" type="text" placeholder="搜索教材、课程、资料…">
       <div id="liveResults"></div>
     </div>
     <div class="header-actions">
-      <a href="/resources"><span>资源</span></a>
-      <a href="/wanted">💬 <span>求购</span></a>
-      <a href="/resources/publish">📤 <span>发布</span></a>
-      <a href="/user/shoppingCart">🛒 <span>购物车</span> {{#if authData.isLoggedIn}}<span class="cart-badge">{{cartCount}}</span>{{/if}}</a>
+      <a href="/resources">{{{icon "book-2"}}}<span> 资源</span></a>
+      <a href="/wanted">{{{icon "messages"}}}<span> 求购</span></a>
+      <a href="/resources/publish">{{{icon "plus"}}}<span> 发布</span></a>
+      <a href="/user/shoppingCart">{{{icon "shopping-cart"}}}<span> 购物车</span>{{#if authData.isLoggedIn}}<span class="cart-badge">{{cartCount}}</span>{{/if}}</a>
       {{#if authData.isLoggedIn}}
-      <a href="/user/center">👤 <span>{{authData.user.firstName}}</span></a>
-      <a href="/user/logout">🚪</a>
+      <a href="/user/center">{{{icon "user"}}}<span> {{authData.user.firstName}}</span></a>
+      <a href="/user/logout">{{{icon "logout"}}}</a>
       {{else}}
       <a href="/login"><span>登录</span></a>
       <a href="/register"><span>注册</span></a>
       {{/if}}
-      <button id="themeToggle" class="theme-toggle">🌙</button>
+      <button id="themeToggle" class="theme-toggle">{{{icon "moon"}}}</button>
     </div>
   </div>
 </header>

@@ -1,7 +1,7 @@
 <div class="page-header">
   <div>
-    <div class="page-pretitle">管理后台</div>
-    <h1>💬 评论管理</h1>
+    <div class="page-pretitle">{{{icon "dashboard"}}} 管理后台</div>
+    <h1>{{{icon "messages"}}} 评论管理</h1>
   </div>
 </div>
 
@@ -9,25 +9,25 @@
   <table class="admin-table">
     <thead>
       <tr>
-        <th>用户</th>
-        <th>资源</th>
-        <th>评论内容</th>
-        <th style="text-align:center">评分</th>
-        <th>时间</th>
-        <th style="text-align:center">操作</th>
+        <th>{{{icon "user"}}} 用户</th>
+        <th>{{{icon "book-2"}}} 资源</th>
+        <th>{{{icon "clipboard-text"}}} 评论内容</th>
+        <th style="text-align:center">{{{icon "star"}}} 评分</th>
+        <th>{{{icon "clock"}}} 时间</th>
+        <th style="text-align:center">{{{icon "settings"}}} 操作</th>
       </tr>
     </thead>
     <tbody>
       {{#each comments}}
       <tr>
-        <td><strong>{{userName}}</strong></td>
+        <td><strong>{{{icon "user"}}} {{userName}}</strong></td>
         <td><a href="/resources/{{resourceId}}">{{resourceTitle}}</a></td>
         <td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-secondary)">{{text}}</td>
         <td style="text-align:center;color:var(--warning);font-weight:600">{{stars rating}}</td>
-        <td style="font-size:12px;color:var(--text-muted)">{{createdAt}}</td>
+        <td style="font-size:12px;color:var(--text-muted)">{{{icon "clock"}}} {{createdAt}}</td>
         <td style="text-align:center">
           <form method="post" action="/comments/{{id}}/delete" style="display:inline">
-            <button class="btn-action btn-action-reject">🗑 删除</button>
+            <button class="btn-action btn-action-reject">{{{icon "trash"}}} 删除</button>
           </form>
         </td>
       </tr>

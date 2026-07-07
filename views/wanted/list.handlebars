@@ -1,11 +1,11 @@
 <div class="container">
   <div class="page-header">
     <div>
-      <div class="page-pretitle">CampusShelf</div>
-      <h1>💬 校园求购墙</h1>
+      <div class="page-pretitle">{{{icon "home"}}} CampusShelf</div>
+      <h1>{{{icon "messages"}}} 校园求购墙</h1>
     </div>
     <div class="page-actions">
-      <a href="/resources/publish" class="btn btn-primary">📤 发布资源</a>
+      <a href="/resources/publish" class="btn btn-primary">{{{icon "plus"}}} 发布资源</a>
     </div>
   </div>
 
@@ -17,18 +17,18 @@
   <div class="wanted-grid">
     {{#each posts}}
     <div class="wanted-card">
-      <div class="title">📋 {{title}}</div>
+      <div class="title">{{{icon "clipboard-text"}}} {{title}}</div>
       <div class="meta">
-        <span class="badge badge-gray">📍 {{campus}}</span>
-        <span class="badge badge-gray">📖 {{courseName}}</span>
-        <span>👤 {{posterName}}</span>
-        <span>📅 {{createdAt}}</span>
+        <span class="badge badge-gray">{{{icon "map-pin"}}} {{campus}}</span>
+        <span class="badge badge-gray">{{{icon "book-2"}}} {{courseName}}</span>
+        <span>{{{icon "user"}}} {{posterName}}</span>
+        <span>{{{icon "clock"}}} {{createdAt}}</span>
       </div>
-      <div class="budget">💰 预算 ¥{{budget}}</div>
+      <div class="budget">{{{icon "coin"}}} 预算 ¥{{budget}}</div>
       <div class="desc">{{description}}</div>
       {{#if contact}}
       <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;color:var(--text-secondary)">
-        📞 联系：{{contact}}
+        {{{icon "messages"}}} 联系：{{contact}}
       </div>
       {{/if}}
     </div>
@@ -36,7 +36,7 @@
   </div>
   {{else}}
   <div class="empty-state">
-    <div class="icon">💬</div>
+    <div class="icon">{{{icon "messages"}}}</div>
     <h3>暂无求购信息</h3>
     <p>稍后再来看看吧</p>
   </div>

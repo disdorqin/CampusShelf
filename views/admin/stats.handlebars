@@ -1,46 +1,46 @@
 <div class="page-header">
   <div>
-    <div class="page-pretitle">管理后台</div>
-    <h1>📈 数据统计</h1>
+    <div class="page-pretitle">{{{icon "dashboard"}}} 管理后台</div>
+    <h1>{{{icon "chart-bar"}}} 数据统计</h1>
   </div>
 </div>
 
 <div class="admin-charts">
   <div class="chart-card">
-    <h3>📅 发布趋势（近 7 天）</h3>
+    <h3>{{{icon "trending-up"}}} 发布趋势（近 7 天）</h3>
     <canvas id="trendChart" height="240"></canvas>
   </div>
   <div class="chart-card">
-    <h3>📊 分类占比</h3>
+    <h3>{{{icon "category"}}} 分类占比</h3>
     <canvas id="catChart" height="240"></canvas>
   </div>
 </div>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
   <div class="chart-card">
-    <h3>📋 成交趋势（近 7 天）</h3>
+    <h3>{{{icon "shopping-cart"}}} 成交趋势（近 7 天）</h3>
     <canvas id="orderChart" height="220"></canvas>
   </div>
   
   <div class="admin-table-wrap">
     <div class="table-header">
-      <h3>🔥 热门资源排行 Top 10</h3>
+      <h3>{{{icon "bolt"}}} 热门资源排行 Top 10</h3>
     </div>
     <table class="admin-table">
       <thead>
         <tr>
           <th style="width:40px">#</th>
-          <th>资源</th>
-          <th style="width:50px;text-align:center">👁</th>
-          <th style="width:50px;text-align:center">❤️</th>
-          <th style="width:80px;text-align:center">💰</th>
+          <th>{{{icon "book-2"}}} 资源</th>
+          <th style="width:50px;text-align:center">{{{icon "eye"}}}</th>
+          <th style="width:50px;text-align:center">{{{icon "heart"}}}</th>
+          <th style="width:80px;text-align:center">{{{icon "coin"}}}</th>
         </tr>
       </thead>
       <tbody>
         {{#each ranking}}
         <tr>
           <td style="text-align:center"><strong>{{inc @index}}</strong></td>
-          <td><strong>{{title}}</strong><br><span style="font-size:11px;color:var(--text-muted)">{{campus}} · {{categoryLabel}}</span></td>
+          <td><strong>{{title}}</strong><br><span style="font-size:11px;color:var(--text-muted)">{{{icon "map-pin"}}} {{campus}} · {{categoryLabel}}</span></td>
           <td style="text-align:center">{{views}}</td>
           <td style="text-align:center">{{favoritesCount}}</td>
           <td style="text-align:center;font-weight:700;color:var(--accent)">{{priceText}}</td>

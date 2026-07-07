@@ -1,7 +1,7 @@
 <div class="page-header">
   <div>
-    <div class="page-pretitle">管理后台</div>
-    <h1>📦 资源管理</h1>
+    <div class="page-pretitle">{{{icon "dashboard"}}} 管理后台</div>
+    <h1>{{{icon "database"}}} 资源管理</h1>
   </div>
   <div class="page-actions" style="display:flex;gap:8px">
     {{#each statuses}}
@@ -14,34 +14,34 @@
   <table class="admin-table">
     <thead>
       <tr>
-        <th>标题</th>
-        <th>分类</th>
-        <th>卖家</th>
-        <th style="text-align:center">价格</th>
-        <th style="text-align:center">👁</th>
-        <th style="text-align:center">状态</th>
-        <th style="text-align:center">操作</th>
+        <th>{{{icon "book-2"}}} 标题</th>
+        <th>{{{icon "category"}}} 分类</th>
+        <th>{{{icon "user"}}} 卖家</th>
+        <th style="text-align:center">{{{icon "coin"}}} 价格</th>
+        <th style="text-align:center">{{{icon "eye"}}}</th>
+        <th style="text-align:center">{{{icon "settings"}}} 状态</th>
+        <th style="text-align:center">{{{icon "settings"}}} 操作</th>
       </tr>
     </thead>
     <tbody>
       {{#each resources}}
       <tr>
-        <td><strong><a href="/resources/{{id}}" style="color:var(--text)">{{title}}</a></strong><br><span style="font-size:11px;color:var(--text-muted)">{{campus}}</span></td>
+        <td><strong><a href="/resources/{{id}}" style="color:var(--text)">{{title}}</a></strong><br><span style="font-size:11px;color:var(--text-muted)">{{{icon "map-pin"}}} {{campus}}</span></td>
         <td><span class="badge" style="background:{{categoryColor}};color:#fff">{{categoryLabel}}</span></td>
         <td>{{sellerName}}</td>
         <td style="text-align:center;font-weight:700;color:var(--accent)">{{priceText}}</td>
         <td style="text-align:center">{{views}}</td>
-        <td style="text-align:center"><span class="status status-{{#if (eq status 'pending')}}yellow{{/if}}{{#if (eq status 'approved')}}green{{/if}}{{#if (eq status 'rejected')}}red{{/if}}{{#if (eq status 'sold')}}gray{{/if}}">{{statusLabel}}</span></td>
+        <td style="text-align:center"><span class="status status-{{#if (eq status 'pending')}}yellow{{/if}}{{#if (eq status 'approved')}}green{{/if}}{{#if (eq status 'rejected')}}red{{/if}}{{#if (eq status 'sold')}}gray{{/if}}">{{{icon "clock"}}} {{statusLabel}}</span></td>
         <td style="text-align:center">
           <div class="admin-actions" style="justify-content:center">
             {{#if (eq status 'pending')}}
-            <form method="post" action="/admin/resources/{{id}}/approve" style="display:inline"><button class="btn-action btn-action-approve">✓ 通过</button></form>
-            <form method="post" action="/admin/resources/{{id}}/reject" style="display:inline"><button class="btn-action btn-action-reject">✗ 拒绝</button></form>
+            <form method="post" action="/admin/resources/{{id}}/approve" style="display:inline"><button class="btn-action btn-action-approve">{{{icon "check"}}} 通过</button></form>
+            <form method="post" action="/admin/resources/{{id}}/reject" style="display:inline"><button class="btn-action btn-action-reject">{{{icon "x"}}} 拒绝</button></form>
             {{/if}}
             {{#if (eq status 'approved')}}
-            <form method="post" action="/admin/resources/{{id}}/sold" style="display:inline"><button class="btn-action btn-action-edit">📌 标记售出</button></form>
+            <form method="post" action="/admin/resources/{{id}}/sold" style="display:inline"><button class="btn-action btn-action-edit">{{{icon "check"}}} 标记售出</button></form>
             {{/if}}
-            <a href="/resources/{{id}}" class="btn-action btn-action-view">👁 查看</a>
+            <a href="/resources/{{id}}" class="btn-action btn-action-view">{{{icon "eye"}}} 查看</a>
           </div>
         </td>
       </tr>

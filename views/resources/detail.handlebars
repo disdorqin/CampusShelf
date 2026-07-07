@@ -7,21 +7,21 @@
     <!-- Center: Detail Info -->
     <div class="detail-info">
       <h1>{{resource.title}}</h1>
-      <div class="detail-price">{{resource.priceText}}{{#if (eq resource.price 0)}} <span class="badge badge-success">免费赠送</span>{{/if}}</div>
+      <div class="detail-price">{{{icon "coin"}}} {{resource.priceText}}{{#if (eq resource.price 0)}} <span class="badge badge-success">{{{icon "heart"}}} 免费赠送</span>{{/if}}</div>
       <div class="detail-meta">
-        <span><strong>分类：</strong><span class="badge" style="background:{{resource.categoryColor}};color:#fff">{{resource.categoryLabel}}</span></span>
-        <span><strong>成色：</strong>{{resource.condition}}</span>
-        <span><strong>校区：</strong>{{resource.campus}}</span>
-        <span><strong>课程：</strong>{{resource.courseName}}</span>
-        <span><strong>👁 浏览：</strong>{{resource.views}}</span>
-        <span><strong>❤️ 收藏：</strong>{{resource.favoritesCount}}</span>
-        <span><strong>⭐ 评分：</strong>{{avgRating}} ({{ratingCount}}条)</span>
-        {{#if resource.negotiable}}<span class="badge badge-warning">💰 可议价</span>{{/if}}
+        <span><strong>{{{icon "category"}}} 分类：</strong><span class="badge" style="background:{{resource.categoryColor}};color:#fff">{{resource.categoryLabel}}</span></span>
+        <span><strong>{{{icon "clipboard-text"}}} 成色：</strong>{{resource.condition}}</span>
+        <span><strong>{{{icon "map-pin"}}} 校区：</strong>{{resource.campus}}</span>
+        <span><strong>{{{icon "book-2"}}} 课程：</strong>{{resource.courseName}}</span>
+        <span><strong>{{{icon "eye"}}} 浏览：</strong>{{resource.views}}</span>
+        <span><strong>{{{icon "heart"}}} 收藏：</strong>{{resource.favoritesCount}}</span>
+        <span><strong>{{{icon "star"}}} 评分：</strong>{{avgRating}} ({{ratingCount}}条)</span>
+        {{#if resource.negotiable}}<span class="badge badge-warning">{{{icon "coin"}}} 可议价</span>{{/if}}
       </div>
       <div class="detail-desc">{{resource.description}}</div>
       {{#if resource.tags}}
       <div class="detail-tags">
-        {{#each (split resource.tags ",")}}<span class="tag">#{{this}}</span>{{/each}}
+        {{#each (split resource.tags ",")}}<span class="tag">{{{icon "tag"}}} {{this}}</span>{{/each}}
       </div>
       {{/if}}
     </div>
@@ -29,32 +29,32 @@
     <div class="seller-card">
       <div class="avatar">{{firstChar resource.sellerName}}</div>
       <div class="name">{{resource.sellerName}}</div>
-      <div class="rating">⭐ {{sellerRating}} · {{sellerOrderCount}} 笔交易</div>
-      <div style="text-align:center;font-size:12px;color:var(--text-muted);margin-bottom:16px">📍 {{resource.campus}}</div>
+      <div class="rating">{{{icon "star"}}} {{sellerRating}} · {{sellerOrderCount}} 笔交易</div>
+      <div style="text-align:center;font-size:12px;color:var(--text-muted);margin-bottom:16px">{{{icon "map-pin"}}} {{resource.campus}}</div>
       <div class="stats">
-        <div><div class="num">{{sellerResourceCount}}</div><div class="lbl">在售资源</div></div>
-        <div><div class="num">{{sellerReviewCount}}</div><div class="lbl">累计评价</div></div>
+        <div><div class="num">{{sellerResourceCount}}</div><div class="lbl">{{{icon "database"}}} 在售资源</div></div>
+        <div><div class="num">{{sellerReviewCount}}</div><div class="lbl">{{{icon "messages"}}} 累计评价</div></div>
       </div>
       {{#if authData.isLoggedIn}}
-      <form method="post" action="/resources/{{resource.id}}/addToCart"><button class="btn btn-primary btn-block" type="submit">🛒 加入购物车</button></form>
+      <form method="post" action="/resources/{{resource.id}}/addToCart"><button class="btn btn-primary btn-block" type="submit">{{{icon "shopping-cart"}}} 加入购物车</button></form>
       {{else}}
-      <a href="/login" class="btn btn-primary btn-block">登录后加入购物车</a>
+      <a href="/login" class="btn btn-primary btn-block">{{{icon "shopping-cart"}}} 登录后加入购物车</a>
       {{/if}}
-      <button class="btn btn-outline btn-block fav-btn-detail" data-id="{{resource.id}}" style="margin-top:6px">{{#if resource.isFavorited}}❤️ 已收藏{{else}}🤍 收藏{{/if}}</button>
-      {{#if resource.sellerContact}}<p style="text-align:center;font-size:13px;color:var(--text-secondary);margin-top:12px">📞 联系方式：{{resource.sellerContact}}</p>{{/if}}
+      <button class="btn btn-outline btn-block fav-btn-detail" data-id="{{resource.id}}" style="margin-top:6px">{{#if resource.isFavorited}}{{{icon "heart"}}} 已收藏{{else}}{{{icon "heart"}}} 收藏{{/if}}</button>
+      {{#if resource.sellerContact}}<p style="text-align:center;font-size:13px;color:var(--text-secondary);margin-top:12px">{{{icon "messages"}}} 联系方式：{{resource.sellerContact}}</p>{{/if}}
     </div>
   </div>
 
   <!-- Comments & Reviews -->
   <section class="comments-section" id="comments">
-    <h2>💬 评论与评分 <span style="font-weight:400;color:var(--text-muted);font-size:13px">（{{ratingCount}} 条 · 平均 {{avgRating}} ★）</span></h2>
+    <h2>{{{icon "messages"}}} 评论与评分 <span style="font-weight:400;color:var(--text-muted);font-size:13px">（{{ratingCount}} 条 · 平均 {{avgRating}} ★）</span></h2>
 
     {{#if authData.isLoggedIn}}
     <form method="post" action="/comments" style="margin-bottom:24px">
       <input type="hidden" name="resourceId" value="{{resource.id}}">
       <div style="display:flex;gap:12px;align-items:end;flex-wrap:wrap">
         <div style="min-width:160px">
-          <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px">评分</label>
+          <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px">{{{icon "star"}}} 评分</label>
           <select name="rating" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);color:var(--text)">
             <option value="5">★★★★★ 5</option>
             <option value="4">★★★★ 4</option>
@@ -64,38 +64,38 @@
           </select>
         </div>
         <div style="flex:1;min-width:250px">
-          <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px">评论内容</label>
+          <label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px">{{{icon "clipboard-text"}}} 评论内容</label>
           <textarea name="text" placeholder="说说你的看法…" required style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);min-height:60px;background:var(--bg-card);color:var(--text)"></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">发表评论</button>
+        <button class="btn btn-primary" type="submit">{{{icon "plus"}}} 发表评论</button>
       </div>
     </form>
     {{else}}
-    <div class="alert alert-info" style="margin-bottom:20px"><a href="/login">登录</a> 后即可发表评论与评分。</div>
+    <div class="alert alert-info" style="margin-bottom:20px">{{{icon "user"}}} <a href="/login">登录</a> 后即可发表评论与评分。</div>
     {{/if}}
 
     {{#each comments}}
     <div class="comment">
-      <div class="who">{{userName}} <span class="stars">{{stars rating}}</span></div>
-      <div class="date">{{createdAt}}</div>
+      <div class="who">{{{icon "user"}}} {{userName}} <span class="stars">{{stars rating}}</span></div>
+      <div class="date">{{{icon "clock"}}} {{createdAt}}</div>
       <p class="text">{{text}}</p>
     </div>
     {{else}}
-    <p style="color:var(--text-muted);padding:16px 0">暂无评论，快来抢沙发～</p>
+    <p style="color:var(--text-muted);padding:16px 0">{{{icon "messages"}}} 暂无评论，快来抢沙发～</p>
     {{/each}}
   </section>
 
   <!-- Related Resources -->
   {{#if relatedResources.length}}
   <section class="section">
-    <div class="section-head"><h2><span class="section-icon">📎</span> 相关推荐</h2></div>
+    <div class="section-head"><h2>{{{icon "book-2"}}} 相关推荐</h2></div>
     <div class="grid grid-cards">{{#each relatedResources}}{{> resourceCard}}{{/each}}</div>
   </section>
   {{/if}}
 
   <!-- Security Tips -->
   <div class="security-banner" style="margin-top:20px">
-    <div class="icon">🛡️</div>
+    <div class="icon">{{{icon "shield-check"}}}</div>
     <div class="text">
       <strong>安全交易提示</strong><br>
       CampusShelf 仅提供信息发布与展示平台，交易双方请通过平台信息自行联系。

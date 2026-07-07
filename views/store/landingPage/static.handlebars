@@ -5,11 +5,11 @@
     <p class="hero-subtitle">二手教材、课程笔记、考研资料、实验报告、电子书、学习用品 — 一站式校园资源共享，让知识在校园里传递</p>
     <div class="hero-search-wrap">
       <input id="globalSearch" type="text" placeholder="搜索教材、课程、资料、关键词…">
-      <button onclick="window.location.href='/resources?keyword='+encodeURIComponent(document.getElementById('globalSearch').value)">🔍 搜索</button>
+      <button onclick="window.location.href='/resources?keyword='+encodeURIComponent(document.getElementById('globalSearch').value)">{{{icon "search"}}} 搜索</button>
     </div>
     <div class="search-history" id="searchHistory"></div>
     <div class="hero-hot-tags">
-      <span style="font-size:12px;opacity:0.7;margin-right:4px">🔥 热门搜索：</span>
+      <span class="icon-text" style="font-size:12px;opacity:0.7;margin-right:4px">{{{icon "trending-up"}}} 热门搜索：</span>
       <a href="/resources?keyword=高等数学">高等数学</a>
       <a href="/resources?keyword=考研">考研资料</a>
       <a href="/resources?keyword=Python">Python</a>
@@ -18,10 +18,10 @@
       <a href="/resources?keyword=免费">免费领取</a>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-num">{{stats.resources}}+</div><div class="hero-stat-label">📦 资源总数</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">{{stats.users}}+</div><div class="hero-stat-label">👥 注册用户</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">{{stats.orders}}+</div><div class="hero-stat-label">🤝 成功交易</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">{{stats.approval}}%</div><div class="hero-stat-label">⭐ 好评率</div></div>
+      <div class="hero-stat"><span class="hero-stat-icon">{{{icon "books"}}}</span><div class="hero-stat-num">{{stats.resources}}+</div><div class="hero-stat-label">资源总数</div></div>
+      <div class="hero-stat"><span class="hero-stat-icon">{{{icon "users-plus"}}}</span><div class="hero-stat-num">{{stats.users}}+</div><div class="hero-stat-label">注册用户</div></div>
+      <div class="hero-stat"><span class="hero-stat-icon">{{{icon "refresh"}}}</span><div class="hero-stat-num">{{stats.orders}}+</div><div class="hero-stat-label">成功交易</div></div>
+      <div class="hero-stat"><span class="hero-stat-icon">{{{icon "star"}}}</span><div class="hero-stat-num">{{stats.approval}}%</div><div class="hero-stat-label">好评率</div></div>
     </div>
   </div>
 </section>
@@ -29,7 +29,7 @@
 <!-- Category Entry Section -->
 <section class="section">
   <div class="container">
-    <div class="section-head"><h2><span class="section-icon">📂</span> 资源分类</h2><a href="/resources" class="btn btn-ghost">查看全部 →</a></div>
+    <div class="section-head"><h2>{{{icon "category"}}} 资源分类</h2><a href="/resources" class="btn btn-ghost">查看全部 →</a></div>
     <div class="cat-cards">
       {{#each categories}}
       <a href="/resources?category={{key}}" class="cat-card" style="--cat-color:{{color}}">
@@ -47,7 +47,7 @@
 {{#if hotResources.length}}
 <section class="section section-sm">
   <div class="container">
-    <div class="section-head"><h2><span class="section-icon">🔥</span> 今日推荐</h2><a href="/resources?sort=views" class="btn btn-ghost">更多 →</a></div>
+    <div class="section-head"><h2>{{{icon "bolt"}}} 今日推荐</h2><a href="/resources?sort=views" class="btn btn-ghost">更多 →</a></div>
     <div class="grid grid-cards">{{#each hotResources}}{{> resourceCard}}{{/each}}</div>
   </div>
 </section>
@@ -57,7 +57,7 @@
 {{#if latestResources.length}}
 <section class="section section-sm">
   <div class="container">
-    <div class="section-head"><h2><span class="section-icon">🆕</span> 最新上架</h2><a href="/resources?sort=newest" class="btn btn-ghost">更多 →</a></div>
+    <div class="section-head"><h2>{{{icon "clock"}}} 最新上架</h2><a href="/resources?sort=newest" class="btn btn-ghost">更多 →</a></div>
     <div class="grid grid-cards">{{#each latestResources}}{{> resourceCard}}{{/each}}</div>
   </div>
 </section>
@@ -67,15 +67,15 @@
 {{#if freeResources.length}}
 <section class="section section-sm">
   <div class="container">
-    <div class="section-head"><h2><span class="section-icon">🎁</span> 免费赠送专区</h2><a href="/resources?maxPrice=0" class="btn btn-ghost">更多 →</a></div>
+    <div class="section-head"><h2>{{{icon "discount"}}} 免费赠送专区</h2><a href="/resources?maxPrice=0" class="btn btn-ghost">更多 →</a></div>
     <p style="font-size:13px;color:var(--text-muted);margin:-16px 0 20px">学长学姐免费赠送，只需要你出邮费或者自取即可！</p>
     <div class="free-grid">
       {{#each freeResources}}
       <a href="/resources/{{id}}" class="free-card">
-        <span class="icon">{{categoryIcon}}</span>
+        <span class="icon">{{{icon "discount"}}}</span>
         <div class="title">{{title}}</div>
-        <div class="free-label">🎉 免费领取</div>
-        <div class="campus">📍 {{campus}}</div>
+        <div class="free-label">{{{icon "heart"}}} 免费领取</div>
+        <div class="campus">{{{icon "map-pin"}}} {{campus}}</div>
       </a>
       {{/each}}
     </div>
@@ -87,19 +87,19 @@
 {{#if wanted.length}}
 <section class="section section-sm">
   <div class="container">
-    <div class="section-head"><h2><span class="section-icon">💬</span> 校园求购墙</h2><a href="/wanted" class="btn btn-ghost">查看全部 →</a></div>
+    <div class="section-head"><h2>{{{icon "messages"}}} 校园求购墙</h2><a href="/wanted" class="btn btn-ghost">查看全部 →</a></div>
     <p style="font-size:13px;color:var(--text-muted);margin:-16px 0 20px">同学们正在求购这些资料，如有闲置可以联系他们！</p>
     <div class="wanted-grid">
       {{#each wanted}}
       <div class="wanted-card">
-        <div class="title">📋 {{title}}</div>
+        <div class="title">{{{icon "clipboard-text"}}} {{title}}</div>
         <div class="meta">
-          <span class="badge badge-gray">📍 {{campus}}</span>
-          <span class="badge badge-gray">📖 {{courseName}}</span>
-          <span>👤 {{posterName}}</span>
-          <span>📅 {{createdAt}}</span>
+          <span class="badge badge-gray">{{{icon "map-pin"}}} {{campus}}</span>
+          <span class="badge badge-gray">{{{icon "book-2"}}} {{courseName}}</span>
+          <span>{{{icon "user"}}} {{posterName}}</span>
+          <span>{{{icon "clock"}}} {{createdAt}}</span>
         </div>
-        <div class="budget">💰 预算 ¥{{budget}}</div>
+        <div class="budget">{{{icon "coin"}}} 预算 ¥{{budget}}</div>
         <div class="desc">{{description}}</div>
       </div>
       {{/each}}
@@ -111,26 +111,26 @@
 <!-- Transaction Steps -->
 <section class="section section-sm">
   <div class="container">
-    <div class="section-head"><h2><span class="section-icon">📋</span> 交易流程</h2></div>
+    <div class="section-head"><h2>{{{icon "refresh"}}} 交易流程</h2></div>
     <div class="steps">
       <div class="step-card">
-        <div class="step-num">1</div>
-        <h4>📤 发布资源</h4>
+        <div class="step-num">{{{icon "cloud-upload"}}}</div>
+        <h4>发布资源</h4>
         <p>上传教材、笔记或用品信息，填写详细描述和价格</p>
       </div>
       <div class="step-card">
-        <div class="step-num">2</div>
-        <h4>✅ 平台审核</h4>
+        <div class="step-num">{{{icon "shield-check"}}}</div>
+        <h4>平台审核</h4>
         <p>管理员审核信息真实性后自动上架展示</p>
       </div>
       <div class="step-card">
-        <div class="step-num">3</div>
-        <h4>💬 联系卖家</h4>
+        <div class="step-num">{{{icon "messages"}}}</div>
+        <h4>联系卖家</h4>
         <p>通过平台信息联系卖家，约定线下交易</p>
       </div>
       <div class="step-card">
-        <div class="step-num">4</div>
-        <h4>⭐ 评价反馈</h4>
+        <div class="step-num">{{{icon "star"}}}</div>
+        <h4>评价反馈</h4>
         <p>交易成功后为资源评分评论，帮助其他同学</p>
       </div>
     </div>
@@ -140,7 +140,7 @@
 <!-- Recent Views -->
 <div id="recentViewSection" class="section section-sm" style="display:none">
   <div class="container">
-    <div class="section-head"><h2><span class="section-icon">👁️</span> 最近浏览</h2></div>
+    <div class="section-head"><h2>{{{icon "eye"}}} 最近浏览</h2></div>
     <div class="recent-scroll" id="recentScroll"></div>
   </div>
 </div>

@@ -1,62 +1,62 @@
 <!-- Page Header -->
 <div class="page-header">
   <div>
-    <div class="page-pretitle">管理后台</div>
-    <h1>仪表盘</h1>
+    <div class="page-pretitle">{{{icon "dashboard"}}} 管理后台</div>
+    <h1>{{{icon "dashboard"}}} 仪表盘</h1>
   </div>
   <div class="page-actions">
-    <span style="font-size:12px;color:var(--text-muted)">缓存模式：{{cacheMode}}</span>
+    <span style="font-size:12px;color:var(--text-muted)">{{{icon "settings"}}} 缓存模式：{{cacheMode}}</span>
   </div>
 </div>
 
 <!-- Enhanced Stat Cards -->
 <div class="admin-stats">
   <div class="admin-stat-card">
-    <div class="icon" style="background:linear-gradient(135deg,#4F46E5,#818CF8)">👥</div>
+    <div class="icon" style="background:linear-gradient(135deg,#4F46E5,#818CF8)">{{{icon "users-plus"}}}</div>
     <div class="info">
       <div class="num">{{stats.users}}</div>
       <div class="lbl">总用户数</div>
-      <div class="change up">↑ 注册用户</div>
+      <div class="change up">{{{icon "trending-up"}}} 注册用户</div>
     </div>
   </div>
   <div class="admin-stat-card">
-    <div class="icon" style="background:linear-gradient(135deg,#059669,#34D399)">📦</div>
+    <div class="icon" style="background:linear-gradient(135deg,#059669,#34D399)">{{{icon "books"}}}</div>
     <div class="info">
       <div class="num">{{stats.resources}}</div>
       <div class="lbl">已审核资源</div>
-      <div class="change up">共 {{stats.resourcesTotal}} 条资源</div>
+      <div class="change up">{{{icon "database"}}} 共 {{stats.resourcesTotal}} 条资源</div>
     </div>
   </div>
   <div class="admin-stat-card">
-    <div class="icon" style="background:linear-gradient(135deg,#D97706,#FBBF24)">⏳</div>
+    <div class="icon" style="background:linear-gradient(135deg,#D97706,#FBBF24)">{{{icon "clock"}}}</div>
     <div class="info">
       <div class="num">{{stats.pending}}</div>
       <div class="lbl">待审核</div>
-      <div class="change {{#if (gt stats.pending 0)}}up{{else}}down{{/if}}">{{#if (gt stats.pending 0)}}⚠ 需要处理{{else}}✅ 已清空{{/if}}</div>
+      <div class="change {{#if (gt stats.pending 0)}}up{{else}}down{{/if}}">{{#if (gt stats.pending 0)}}{{{icon "alert-circle"}}} 需要处理{{else}}{{{icon "check"}}} 已清空{{/if}}</div>
     </div>
   </div>
   <div class="admin-stat-card">
-    <div class="icon" style="background:linear-gradient(135deg,#DC2626,#F87171)">📋</div>
+    <div class="icon" style="background:linear-gradient(135deg,#DC2626,#F87171)">{{{icon "shopping-cart"}}}</div>
     <div class="info">
       <div class="num">{{stats.orders}}</div>
       <div class="lbl">总订单</div>
-      <div class="change up">累计交易</div>
+      <div class="change up">{{{icon "refresh"}}} 累计交易</div>
     </div>
   </div>
   <div class="admin-stat-card">
-    <div class="icon" style="background:linear-gradient(135deg,#0891B2,#22D3EE)">💬</div>
+    <div class="icon" style="background:linear-gradient(135deg,#0891B2,#22D3EE)">{{{icon "messages"}}}</div>
     <div class="info">
       <div class="num">{{stats.comments}}</div>
       <div class="lbl">总评论</div>
-      <div class="change up">用户反馈</div>
+      <div class="change up">{{{icon "star"}}} 用户反馈</div>
     </div>
   </div>
   <div class="admin-stat-card">
-    <div class="icon" style="background:linear-gradient(135deg,#7C3AED,#A855F7)">📈</div>
+    <div class="icon" style="background:linear-gradient(135deg,#7C3AED,#A855F7)">{{{icon "chart-bar"}}}</div>
     <div class="info">
       <div class="num">{{stats.today}}</div>
       <div class="lbl">今日新增</div>
-      <div class="change up">最新动态</div>
+      <div class="change up">{{{icon "clock"}}} 最新动态</div>
     </div>
   </div>
 </div>
@@ -64,11 +64,11 @@
 <!-- Chart Row -->
 <div class="admin-charts">
   <div class="chart-card">
-    <h3>📅 最近 7 天发布趋势</h3>
+    <h3>{{{icon "trending-up"}}} 最近 7 天发布趋势</h3>
     <canvas id="trendChart" height="220"></canvas>
   </div>
   <div class="chart-card">
-    <h3>📊 资源分类占比</h3>
+    <h3>{{{icon "category"}}} 资源分类占比</h3>
     <canvas id="catChart" height="220"></canvas>
   </div>
 </div>
@@ -78,23 +78,23 @@
   <!-- Ranking -->
   <div class="admin-table-wrap">
     <div class="table-header">
-      <h3>🔥 热门资源排行</h3>
-      <span style="font-size:12px;color:var(--text-muted)">按收藏排序</span>
+      <h3>{{{icon "bolt"}}} 热门资源排行</h3>
+      <span style="font-size:12px;color:var(--text-muted)">{{{icon "heart"}}} 按收藏排序</span>
     </div>
     <table class="admin-table">
       <thead>
         <tr>
           <th style="width:40px">#</th>
           <th>资源</th>
-          <th style="width:60px;text-align:center">👁</th>
-          <th style="width:60px;text-align:center">❤️</th>
+          <th style="width:60px;text-align:center">{{{icon "eye"}}}</th>
+          <th style="width:60px;text-align:center">{{{icon "heart"}}}</th>
         </tr>
       </thead>
       <tbody>
         {{#each ranking}}
         <tr>
           <td style="text-align:center"><strong>{{inc @index}}</strong></td>
-          <td><strong>{{title}}</strong><br><span style="font-size:11px;color:var(--text-muted)">{{campus}} · {{categoryLabel}}</span></td>
+          <td><strong>{{title}}</strong><br><span style="font-size:11px;color:var(--text-muted)">{{{icon "map-pin"}}} {{campus}} · {{categoryLabel}}</span></td>
           <td style="text-align:center">{{views}}</td>
           <td style="text-align:center">{{favoritesCount}}</td>
         </tr>
@@ -106,21 +106,21 @@
   <!-- Recent -->
   <div class="admin-table-wrap">
     <div class="table-header">
-      <h3>🆕 最近资源</h3>
-      <span style="font-size:12px;color:var(--text-muted)">最新发布</span>
+      <h3>{{{icon "clock"}}} 最近资源</h3>
+      <span style="font-size:12px;color:var(--text-muted)">{{{icon "database"}}} 最新发布</span>
     </div>
     <table class="admin-table">
       <thead>
         <tr>
           <th>资源</th>
-          <th style="width:100px">状态</th>
+          <th style="width:100px">{{{icon "settings"}}} 状态</th>
         </tr>
       </thead>
       <tbody>
         {{#each recent}}
         <tr>
-          <td><strong>{{title}}</strong><br><span style="font-size:11px;color:var(--text-muted)">{{sellerName}} · {{categoryLabel}}</span></td>
-          <td><span class="status status-{{#if (eq status 'pending')}}yellow{{/if}}{{#if (eq status 'approved')}}green{{/if}}{{#if (eq status 'rejected')}}red{{/if}}{{#if (eq status 'sold')}}gray{{/if}}">{{statusLabel}}</span></td>
+          <td><strong>{{title}}</strong><br><span style="font-size:11px;color:var(--text-muted)">{{{icon "user"}}} {{sellerName}} · {{categoryLabel}}</span></td>
+          <td><span class="status status-{{#if (eq status 'pending')}}yellow{{/if}}{{#if (eq status 'approved')}}green{{/if}}{{#if (eq status 'rejected')}}red{{/if}}{{#if (eq status 'sold')}}gray{{/if}}">{{{icon "clock"}}} {{statusLabel}}</span></td>
         </tr>
         {{/each}}
       </tbody>
@@ -128,7 +128,7 @@
   </div>
 </div>
 
-<p style="font-size:12px;color:var(--text-muted);margin-top:20px;text-align:center">管理员 @ CampusShelf 管理后台</p>
+<p style="font-size:12px;color:var(--text-muted);margin-top:20px;text-align:center">{{{icon "dashboard"}}} 管理员 @ CampusShelf 管理后台</p>
 
 <script>
 var trendData = {{{json trend}}};

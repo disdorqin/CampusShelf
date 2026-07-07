@@ -2,10 +2,37 @@
   <defs>
     <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#4F46E5"/>
-      <stop offset="100%" style="stop-color:#7C3AED"/>
+      <stop offset="100%" style="stop-color:#818CF8"/>
     </linearGradient>
   </defs>
-  <rect width="200" height="200" rx="32" fill="url(#g)"/>
-  <text x="100" y="80" text-anchor="middle" font-size="72" fill="#fff">📚</text>
-  <text x="100" y="140" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" font-weight="800" fill="#fff">CS</text>
+  <!-- Rounded background -->
+  <rect width="200" height="200" rx="36" fill="url(#g)"/>
+  <!-- Open book shape -->
+  <g transform="translate(38,30)" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left page -->
+    <path d="M62,10 L62,130"/>
+    <path d="M10,10 Q36,10 62,30 Q62,30 62,30"/>
+    <path d="M10,10 Q36,10 62,30"/>
+    <path d="M10,10 L10,120 Q36,120 62,130"/>
+    <!-- Right page -->
+    <path d="M62,30 Q88,10 114,10"/>
+    <path d="M114,10 Q114,120 114,120"/>
+    <path d="M62,130 Q88,120 114,120"/>
+    <!-- Spine -->
+    <path d="M10,10 Q36,10 62,30"/>
+    <path d="M10,120 Q36,120 62,130"/>
+    <path d="M114,10 Q88,10 62,30"/>
+    <path d="M114,120 Q88,120 62,130"/>
+  </g>
+  <!-- Content lines on pages -->
+  <g stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linecap="round" fill="none" transform="translate(38,30)">
+    <line x1="18" y1="35" x2="50" y2="45"/>
+    <line x1="18" y1="50" x2="48" y2="60"/>
+    <line x1="18" y1="65" x2="40" y2="72"/>
+    <line x1="72" y1="45" x2="104" y2="35"/>
+    <line x1="72" y1="60" x2="102" y2="50"/>
+    <line x1="72" y1="72" x2="95" y2="65"/>
+  </g>
+  <!-- CS letters at bottom -->
+  <text x="100" y="175" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="28" font-weight="700" fill="#fff" letter-spacing="2">CS</text>
 </svg>

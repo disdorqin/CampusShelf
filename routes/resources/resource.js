@@ -56,17 +56,24 @@ router.get("/", async(req, res) => {
     return '/resources?' + q.toString();
   };
   const sortLabels = {
-    newest: '🕐 最新',
-    price_asc: '💰 价格从低到高',
-    price_desc: '💰 价格从高到低',
-    views: '👁 浏览最多',
-    rating: '⭐ 评分最高'
+    newest: '最新',
+    price_asc: '价格从低到高',
+    price_desc: '价格从高到低',
+    views: '浏览最多',
+    rating: '评分最高'
+  };
+  const sortIcons = {
+    newest: 'clock',
+    price_asc: 'sort-ascending',
+    price_desc: 'sort-descending',
+    views: 'eye',
+    rating: 'star'
   };
   const sortButtons = Object.keys(sortLabels).map(s => {
     const q = _qs();
     q.set('sort', s);
     q.set('page', 1);
-    return { label: sortLabels[s], url: '/resources?' + q.toString(), active: opts.sort === s };
+    return { label: sortLabels[s], iconName: sortIcons[s], url: '/resources?' + q.toString(), active: opts.sort === s };
   });
   const pages = [];
   for (let p = 1; p <= totalPages; p++) pages.push({ n: p, url: buildQuery(p), active: p === safePage });

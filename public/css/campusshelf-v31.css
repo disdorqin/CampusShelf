@@ -1,0 +1,163 @@
+/* ============================================================
+   CampusShelf v3.1 — 精修补丁
+   图标统一后的小修小补
+   ============================================================ */
+
+/* ---------- Logo fix ---------- */
+.header-logo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ---------- Icon inline with text ---------- */
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.icon-text .cs-icon {
+  flex-shrink: 0;
+}
+
+/* ---------- Sort buttons with icons ---------- */
+.sort-btn .cs-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---------- Filter group label with icon ---------- */
+.filter-group label .cs-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+}
+
+/* ---------- Admin stat card icon size fix ---------- */
+.admin-stat-card .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-stat-card .icon .cs-icon {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
+
+/* ---------- Admin table status align ---------- */
+.admin-table .status .cs-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* ---------- Empty state icon ---------- */
+.empty-state .cs-icon {
+  width: 64px;
+  height: 64px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+/* ---------- Section head icon ---------- */
+.section-head .cs-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--primary);
+}
+
+/* ---------- Hero stat icon ---------- */
+.hero-stat-icon {
+  display: block;
+  margin-bottom: 4px;
+}
+.hero-stat-icon .cs-icon {
+  width: 28px;
+  height: 28px;
+  color: rgba(255,255,255,0.9);
+}
+
+/* ---------- Seller avatar ---------- */
+.seller-card .avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ---------- Step number ---------- */
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Category card icon ---------- */
+.cat-card .cs-icon {
+  display: block;
+  margin: 0 auto 8px;
+}
+
+/* ---------- Wanted card ---------- */
+.wanted-card .cs-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ---------- Free card icon ---------- */
+.free-card .cs-icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  margin: 0 auto 10px;
+  color: var(--success);
+}
+
+/* ---------- Security banner icon ---------- */
+.security-banner .cs-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--success);
+}
+
+/* ---------- Compare item ---------- */
+.compare-item .cs-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Recent item ---------- */
+.recent-item .cs-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---------- Flash messages ---------- */
+.flash-message .cs-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ---------- Admin page header ---------- */
+.page-header .cs-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------- Chart card ---------- */
+.chart-card .cs-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .cat-card .cs-icon { width: 24px; height: 24px; }
+  .hero-stat-icon .cs-icon { width: 22px; height: 22px; }
+}

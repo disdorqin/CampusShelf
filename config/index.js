@@ -39,6 +39,16 @@ const handlebarsInstance = exphbs.create({
         getCategoryLabel: (key) => {
           const map = { textbook:'二手教材', notes:'课程笔记', exam:'考研资料', report:'实验报告', ebook:'电子书', supplies:'学习用品' };
           return map[key] || key;
+        },
+        // SVG icon helper — returns inline SVG from cached file content
+        icon: function(name) {
+          // Handlebars passes options as last arg; ensure name is a string
+          if (typeof name !== 'string' && name && name.hash) name = '';
+          if (typeof name !== 'string') name = '';
+          const cached = require('../utilities/iconCache');
+          const svg = cached.get(name) || '';
+          const cssClass = 'cs-icon';
+          return svg ? svg.replace('<svg', '<svg class="' + cssClass + '"') : '';
         }
     }
 });
