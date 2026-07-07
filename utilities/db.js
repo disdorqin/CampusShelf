@@ -15,11 +15,15 @@ const DB_TYPE = (process.env.DB_TYPE || 'json').toLowerCase();
 let pool = null;
 
 function getConfig() {
+  const pw = process.env.DB_PASSWORD;
+  if (!pw && DB_TYPE === 'mysql') {
+    console.warn('[db] ⚠️  DB_PASSWORD not set in .env. Copy .env.example → .env and set DB_PASSWORD.');
+  }
   return {
     host: process.env.DB_HOST || '127.0.0.1',
     port: parseInt(process.env.DB_PORT || '3306'),
     user: process.env.DB_USER || 'campusshelf',
-    password: process.env.DB_PASSWORD || 'Zlt20060313#',
+    password: pw || '',
     database: process.env.DB_NAME || 'campusshelf',
     waitForConnections: true,
     connectionLimit: 10,

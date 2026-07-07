@@ -24,7 +24,7 @@ const DB_CONFIG = {
   host: process.env.DB_HOST || '127.0.0.1',
   port: parseInt(process.env.DB_PORT || '3306'),
   user: process.env.DB_USER || 'campusshelf',
-  password: process.env.DB_PASSWORD || 'Zlt20060313#',
+  password: process.env.DB_PASSWORD || (() => { throw new Error('DB_PASSWORD not set. Copy .env.example to .env and set DB_PASSWORD.'); })(),
   database: process.env.DB_NAME || 'campusshelf',
   multipleStatements: true,
 };

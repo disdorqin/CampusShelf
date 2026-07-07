@@ -47,43 +47,45 @@ CampusShelf 把「通用书店」升级为「校园学习资源垂直平台」�
 - 用户：注册/登录、个人中心、购物车、订单、搜索历史、最近浏览
 - 后台：`/admin` Dashboard、资源管理、用户管理、订单管理、评论管理、数据统计
 
-## 快速启动（MySQL 模式 — 推荐）
+## 快速启动（推荐 — Docker + MySQL）
+
+> **开发者已全部配置好**，以下步骤 3–4 只需跑一次，以后直接 `npm start`。
 
 ```bash
 # 1. 安装依赖
 npm install
 
-# 2. 创建本地环境变量
-copy .env.example .env
-# Windows PowerShell:  Copy-Item .env.example .env
-# 编辑 .env，将 DB_PASSWORD 和 MYSQL_PASSWORD 改为本地密码
+# 2. 创建本地环境变量（仅首次）
+Copy-Item .env.example .env
+# 用记事本打开 .env，把 DB_PASSWORD 和 MYSQL_PASSWORD 改成你的密码
 
-# 3. 启动 Docker 数据库（MySQL + Redis + Adminer）
+# 3. 启动 Docker 数据库（MySQL 8.4 + Redis 7 + Adminer 面板）
 npm run db:start
 
-# 4. 初始化演示数据
+# 4. 初始化演示数据（仅首次）
 npm run db:seed
 
 # 5. 启动项目
 npm start
-# 打开 http://localhost:3000
+# → http://localhost:3000
+# → 数据库管理 http://localhost:8080（System: MySQL / Server: mysql / 密码同 DB_PASSWORD）
 ```
 
-## 快速启动（JSON 模式 — 离线可用）
+> **前置条件**：安装 [Docker Desktop](https://www.docker.com/products/docker-desktop/) 并确保它正在运行。
+
+## 备用方案（JSON 离线模式）
+
+如果本机没有 Docker，或者只想快速看 UI，可以用 JSON 文件存储：
 
 ```bash
-# 1. 安装依赖
 npm install
-
-# 2. 编辑 .env，设置 DB_TYPE=json
-
-# 3. 初始化演示数据
+# 编辑 .env，将 DB_TYPE=mysql 改为 DB_TYPE=json（其余字段可删）
 node scripts/seedResources.js
 node scripts/seedUsers.js
-
-# 4. 启动
 npm start
 ```
+
+JSON 模式下所有数据存于 `data/` 目录的 JSON 文件中，与原 Bookstore 兼容。
 
 ## 测试账号
 
