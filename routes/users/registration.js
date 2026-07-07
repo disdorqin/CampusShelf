@@ -10,34 +10,27 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", async(req, res) => {
-    let data = req.body;
+router.post("/", (req, res) => {
+    const data = req.body;
 
-    await usersAPI.findByEmail(data.emailInput, function (err, user) {
-        if (user) {
-            res.render("user/registrationView/register", {
+    usersAPI.findByEmail(data.emailInput, (err, existing) => {
+        if (existing) {
+            return res.render("user/registrationView/register", {
                 pageTitle: "Registration - Error",
-                error: "An account with that email already exists."
+                error: "该邮箱已被注册，请直接登录。"
             });
-        } else {
-            usersAPI.insertNewUser(data)
-                .then(user => {
-                    if (user) {
-                        req.logIn(user, function (err) {
-                            if (err) {
-                                return next(err);
-                            }
+        }
 
-                            res.redirect("/");
-                        });
-                    }
-                })
-                .catch(error => {
-                    res.render("error/static", {
-                        pageTitle: "Error",
-                        error: error
-                    });
-                });
+        try {
+            const user = usersAPI.insertNewUser(data);
+            req.logIn(user, (loginErr) => {
+                if (loginErr) {
+                    return res.render("error/static", { pageTitle: "Error", error: "注册成功但自动登录失败，请手动登录。" });
+                }
+                res.redirect("/");
+            });
+        } catch (e) {
+            res.render("error/static", { pageTitle: "Error", error: e.message || String(e) });
         }
     });
 });

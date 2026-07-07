@@ -1,0 +1,57 @@
+<div class="form-wrap">
+  <h2>📤 发布校园资源</h2>
+  <p style="color:var(--muted)">发布后需管理员审核，通过即可在前台展示。</p>
+  <form method="post" action="/resources/publish">
+    <div class="field">
+      <label>资源标题 *</label>
+      <input name="title" required placeholder="如：高等数学（同济第七版）">
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>资源分类 *</label>
+        <select name="category" required>
+          {{#each categories}}<option value="{{this.key}}">{{this.icon}} {{this.label}}</option>{{/each}}
+        </select>
+      </div>
+      <div class="field">
+        <label>价格（元）*</label>
+        <input type="number" name="price" required min="0" step="0.01" placeholder="0">
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>新旧程度</label>
+        <select name="condition">
+          <option>全新</option><option>几乎全新</option><option>轻微笔记</option><option>有明显使用痕迹</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>校区</label>
+        <input name="campus" placeholder="如：奉贤校区">
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>适用课程</label>
+        <input name="courseName" placeholder="如：高等数学">
+      </div>
+      <div class="field">
+        <label>联系方式</label>
+        <input name="sellerContact" placeholder="QQ / 微信 / 邮箱">
+      </div>
+    </div>
+    <div class="field">
+      <label>标签（逗号分隔）</label>
+      <input name="tags" placeholder="教材, 数学, 期末">
+    </div>
+    <div class="field">
+      <label>图片 URL（可选）</label>
+      <input name="imageUrl" placeholder="留空将使用分类默认图">
+    </div>
+    <div class="field">
+      <label>资源描述</label>
+      <textarea name="description" placeholder="描述成色、用途、交易方式等"></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">提交审核</button>
+  </form>
+</div>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DB2777"/>
+      <stop offset="50%" style="stop-color:#EC4899"/>
+      <stop offset="100%" style="stop-color:#F472B6"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="400" height="300" rx="16" fill="url(#bg)"/>
+  <circle cx="30" cy="30" r="60" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="370" cy="280" r="50" fill="rgba(255,255,255,0.04)"/>
+  <!-- 靶心/目标插画 -->
+  <g filter="url(#shadow)" transform="translate(100,40)">
+    <!-- 外环 -->
+    <circle cx="100" cy="90" r="85" fill="none" stroke="#FCE7F3" stroke-width="3" opacity="0.5"/>
+    <circle cx="100" cy="90" r="70" fill="none" stroke="#FBCFE8" stroke-width="3"/>
+    <circle cx="100" cy="90" r="55" fill="none" stroke="#F9A8D4" stroke-width="3"/>
+    <circle cx="100" cy="90" r="40" fill="none" stroke="#F472B6" stroke-width="3"/>
+    <circle cx="100" cy="90" r="25" fill="none" stroke="#EC4899" stroke-width="3"/>
+    <!-- 靶心 -->
+    <circle cx="100" cy="90" r="12" fill="#BE185D"/>
+    <!-- 外环数字标签 -->
+    <text x="100" y="8" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif">目标达成</text>
+    <!-- 箭头 -->
+    <line x1="145" y1="55" x2="110" y2="88" stroke="#FDE68A" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="105,91 112,84 116,93" fill="#FDE68A"/>
+  </g>
+  <text x="200" y="235" text-anchor="middle" font-family="system-ui,sans-serif" font-size="28" font-weight="800" fill="#fff" filter="url(#shadow)">考研资料</text>
+  <text x="200" y="262" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="rgba(255,255,255,0.75)">一战成硕，圆梦名校</text>
+  <rect x="120" y="275" width="160" height="3" rx="1.5" fill="rgba(255,255,255,0.3)"/>
+</svg>

@@ -13,39 +13,28 @@ router.get("/", (req, res) => {
 
 // Login post. Using Passport to verify that the user is authenticated.
 router.post("/", (req, res, next) => {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) {
+            return res.render("user/loginView/login", {
+                pageTitle: "Error",
+                error: "登录过程中发生错误，请重试。"
+            });
+        }
 
-    // Getting the Recaptcha response
-    var recaptchaResponse = req.body['g-recaptcha-response'];
-    if (recaptchaResponse === undefined || recaptchaResponse === '' ||
-        recaptchaResponse === null) {
-        res.render("user/loginView/login", {
-            error: "Please Select Captcha."
-        })
-    } else {
-        passport.authenticate('local', function (err, user, info) {
+        if (!user) {
+            return res.render("user/loginView/login", {
+                pageTitle: "Error",
+                error: "邮箱或密码错误。"
+            });
+        }
+
+        req.logIn(user, function (err) {
             if (err) {
-                res.render("user/loginView/login", {
-                    pageTitle: "Error",
-                    error: "An account with that email does not exist."
-                })
-            } else {
-                if (user) {
-                    req.logIn(user, function (err) {
-                        if (err) {
-                            return next(err);
-                        }
-
-                        res.redirect("/");
-                    });
-                } else {
-                    res.render("user/loginView/login", {
-                        pageTitle: "Error",
-                        error: "Incorrect password."
-                    })
-                }
+                return next(err);
             }
-        })(req, res, next);
-    }
+            res.redirect("/");
+        });
+    })(req, res, next);
 });
 
 module.exports = router;

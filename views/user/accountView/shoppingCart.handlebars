@@ -1,59 +1,29 @@
-<div class="container" style="margin-top: 20px">
-    <p class="h3">
-        Shopping Cart</p>
-    <hr />
-
-    <div class="row">
-        <div class="col-md-7">
-            {{#each cart}}
-            <div class="card" style="margin-bottom: 20px">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="{{this.book.imageURL.thumbnail}}" class="w-100" alt="{{this.book.title}}">
-                    </div>
-
-                    <div class="col-md-8 px-3">
-                        <div class="card-block px-3">
-                            <p class="h4 card-title">
-                                <a href="/search/isbn/{{this.book.isbn}}">{{this.book.title}}</a>
-                            </p>
-                            <p class="card-text">
-                                <small>{{this.book.textSnippet}}</small>
-                            </p>
-                            <form action="shoppingCart/update/{{this.book.isbn}}" method="post">
-                                <p class="lead">Quantity:
-                                    <label class="sr-only" for="quantity">Quantity...</label>
-                                    <input type="text" name="quantity" id="quantity" value="{{this.book.quantity}}">
-                                    <br>
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <button type="submit" class="btn btn-outline-success" name="update" value="update">Update</button>
-                                        <button type="submit" class="btn btn-outline-danger" name="remove" value="remove">Remove</button>
-                                    </div>
-                                </p>
-                            </form>
-                            <p class="lead">Price: ${{this.book.price}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{/each}}
+<section class="section" style="margin-top:28px;max-width:820px">
+  <div class="section-head"><h2>🛒 购物车</h2></div>
+  {{#if flash}}<div class="alert alert-{{flash.type}}">{{flash.msg}}</div>{{/if}}
+  {{#if cart.length}}
+    <div class="filters" style="box-shadow:none">
+    {{#each cart}}
+      <div style="display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px dashed var(--border)">
+        <img src="{{this.book.imageURL.thumbnail}}" style="width:64px;height:64px;border-radius:10px;object-fit:cover" onerror="this.src='/images/logo.svg'">
+        <div style="flex:1">
+          <a href="/resources/{{this.book.isbn}}" style="font-weight:700">{{this.book.title}}</a>
+          <div style="color:var(--muted);font-size:13px">{{this.book.category}}</div>
         </div>
-
-        <div class="col-md-5">
-
-            <!-- Search Widget -->
-            <div class="card my-4">
-                <p class="h5 card-header">Cart Details</p>
-                <div class="card-body">
-                    <p class="h5">Number of Items: {{numOfItems}}</p>
-                    <p class="h5">Total: ${{totalAmount}}</p>
-
-                    <form action="confirmation" method="get">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Checkout</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
+        <div style="color:var(--danger);font-weight:800">¥{{this.book.price}}</div>
+        <form action="/user/shoppingCart/update/{{this.book.isbn}}" method="post" style="display:flex;gap:6px;align-items:center">
+          <input type="number" name="quantity" value="{{this.book.quantity}}" min="1" style="width:60px;padding:6px">
+          <button class="btn btn-sm btn-ghost" name="update" value="1">更新</button>
+          <button class="btn btn-sm btn-danger" name="remove" value="1">移除</button>
+        </form>
+      </div>
+    {{/each}}
     </div>
-</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">
+      <div style="font-size:18px">合计：<b style="color:var(--danger)">¥{{totalAmount}}</b> · 共 {{numOfItems}} 件</div>
+      <a class="btn btn-primary" href="/user/confirmation">去结算</a>
+    </div>
+  {{else}}
+    <div class="alert alert-error">购物车是空的，<a href="/resources" style="color:var(--primary)">去逛逛</a>。</div>
+  {{/if}}
+</section>

@@ -1,0 +1,43 @@
+<div class="page-header">
+  <div>
+    <div class="page-pretitle">管理后台</div>
+    <h1>📋 订单管理</h1>
+  </div>
+</div>
+
+<div class="admin-table-wrap">
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>订单号</th>
+        <th>用户</th>
+        <th style="text-align:center">金额</th>
+        <th style="text-align:center">状态</th>
+        <th>时间</th>
+        <th style="text-align:center">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each orders}}
+      <tr>
+        <td><code style="font-size:11px">{{id}}</code></td>
+        <td><strong>{{userName}}</strong></td>
+        <td style="text-align:center;font-weight:700;color:var(--accent)">{{totalText}}</td>
+        <td style="text-align:center"><span class="status status-{{#if (eq status 'pending')}}yellow{{/if}}{{#if (eq status 'completed')}}green{{/if}}{{#if (eq status 'cancelled')}}red{{/if}}">{{statusLabel}}</span></td>
+        <td style="font-size:12px;color:var(--text-muted)">{{createdAt}}</td>
+        <td style="text-align:center">
+          <form method="post" action="/admin/orders/{{id}}/status" style="display:flex;gap:4px;justify-content:center">
+            <select name="status" style="padding:4px 8px;border:1px solid var(--border);border-radius:4px;font-size:12px;background:var(--bg-card);color:var(--text)">
+              <option value="pending">待确认</option>
+              <option value="completed">已完成</option>
+              <option value="cancelled">已取消</option>
+            </select>
+            <button class="btn-action btn-action-edit">更新</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+      {{#unless orders.length}}<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted)">暂无订单</td></tr>{{/unless}}
+    </tbody>
+  </table>
+</div>

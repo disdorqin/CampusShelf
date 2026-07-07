@@ -1,0 +1,17 @@
+# CampusShelf — optional Redis service for cache optimization (Phase 6)
+# Redis is OPTIONAL. The app automatically falls back to an in-memory cache
+# when Redis is unavailable, so you can run without Docker / Redis.
+#
+# Usage:
+#   docker compose up -d        # start redis on localhost:6379
+#   docker compose down         # stop
+#
+# Then start the app normally:  npm start
+services:
+  redis:
+    image: redis:7
+    container_name: campusshelf-redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "no"]
+    restart: unless-stopped

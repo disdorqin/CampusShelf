@@ -1,0 +1,64 @@
+<div class="form-wrap">
+  <h2>✏️ 编辑资源</h2>
+  <form method="post" action="/resources/{{resource.id}}/edit">
+    <div class="field">
+      <label>资源标题 *</label>
+      <input name="title" required value="{{resource.title}}">
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>资源分类 *</label>
+        <select name="category" required>
+          {{#each categories}}
+            <option value="{{this.key}}" {{#if (eq ../resource.category this.key)}}selected{{/if}}>{{this.icon}} {{this.label}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="field">
+        <label>价格（元）*</label>
+        <input type="number" name="price" required min="0" step="0.01" value="{{resource.price}}">
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>新旧程度</label>
+        <select name="condition">
+          <option {{#if (eq resource.condition '全新')}}selected{{/if}}>全新</option>
+          <option {{#if (eq resource.condition '几乎全新')}}selected{{/if}}>几乎全新</option>
+          <option {{#if (eq resource.condition '轻微笔记')}}selected{{/if}}>轻微笔记</option>
+          <option {{#if (eq resource.condition '有明显使用痕迹')}}selected{{/if}}>有明显使用痕迹</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>校区</label>
+        <input name="campus" value="{{resource.campus}}">
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>适用课程</label>
+        <input name="courseName" value="{{resource.courseName}}">
+      </div>
+      <div class="field">
+        <label>联系方式</label>
+        <input name="sellerContact" value="{{resource.sellerContact}}">
+      </div>
+    </div>
+    <div class="field">
+      <label>标签（逗号分隔）</label>
+      <input name="tags" value="{{#each resource.tags}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}">
+    </div>
+    <div class="field">
+      <label>图片 URL</label>
+      <input name="imageUrl" value="{{resource.imageUrl}}">
+    </div>
+    <div class="field">
+      <label>资源描述</label>
+      <textarea name="description">{{resource.description}}</textarea>
+    </div>
+    <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">保存修改</button>
+    <form action="/resources/{{resource.id}}/delete" method="post" style="margin-top:10px">
+      <button class="btn btn-danger" type="submit" style="width:100%;justify-content:center">删除该资源</button>
+    </form>
+  </form>
+</div>

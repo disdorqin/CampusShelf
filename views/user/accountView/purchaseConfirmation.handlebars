@@ -1,38 +1,10 @@
-<div class="container topDownOffset">
-    <div>
-        <h1>Thank you for your order</h1>
-        <hr />
-    </div>
-
-    <section>
-        <p class="lead">Here is a breakdown of your order:</p>
-
-        <div>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ISBN</th>
-                        <th>Title</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each cart}}
-                    <tr>
-                        <th scope="row">{{this.book.isbn}}</th>
-                        <td>{{this.book.title}}</td>
-                        <td>{{this.book.quantity}}</td>
-                        <td>${{this.book.price}}</td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="alert alert-success" role="alert">
-            Total Amount:
-            <strong>${{totalAmount}}</strong>
-        </div>
-    </section>
-</div>
+<section class="section" style="margin-top:48px;max-width:640px;text-align:center">
+  <div style="font-size:56px">✅</div>
+  <h2>下单成功！</h2>
+  <p style="color:var(--muted)">订单已提交，状态：<b>待确认</b>。卖家会尽快与你联系。</p>
+  <p style="font-size:20px">合计：<b style="color:var(--danger)">¥{{totalAmount}}</b></p>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:18px">
+    <a class="btn btn-primary" href="/user">查看我的订单</a>
+    <a class="btn btn-ghost" href="/resources">继续逛逛</a>
+  </div>
+</section>

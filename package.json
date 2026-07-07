@@ -1,10 +1,11 @@
 {
-  "name": "bookstore",
+  "name": "campusshelf",
   "version": "1.0.0",
-  "description": "Online bookstore utilizing Node.Js, Express and MongoDB",
+  "description": "CampusShelf - 校园学习资源交易平台 (二次开发自 julio-lockhart/Bookstore)",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "dev": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,29 +15,30 @@
   "keywords": [
     "nodejs",
     "express",
-    "mongodb",
+    "campusshelf",
     "bookstore",
-    "google",
-    "books",
-    "api"
+    "campus",
+    "resources"
   ],
-  "author": "Julio Lockhart",
+  "author": "Julio Lockhart (original) / Secondary dev: CampusShelf team",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.17.1",
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.16.2",
-    "express-handlebars": "^3.0.0",
-    "express-session": "^1.15.6",
-    "hbs": "^4.0.1",
-    "lodash": "^4.17.4",
-    "moment": "^2.19.4",
-    "mongodb": "^2.2.33",
-    "morgan": "^1.9.0",
-    "passport": "^0.4.0",
+    "axios": "^1.7.7",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "mongodb": "^6.8.0",
+    "moment": "^2.30.1",
+    "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "uuid": "^3.1.0"
+    "uuid": "^9.0.1"
+  },
+  "optionalDependencies": {
+    "redis": "^4.6.13"
   }
 }

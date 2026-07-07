@@ -1,5 +1,5 @@
 const passport = require('passport');
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 const PassportLocalStrategy = require('passport-local');
 
@@ -14,6 +14,7 @@ let data = require('../../data/');
 // will be set at `req.user` in route handlers after authentication.
 let initializePassport = () => {
     passport.use(new LocalStrategy(
+        { usernameField: 'email', passwordField: 'password' },
         function (username, password, callback) {
             data.users.findByEmail(username, function (err, user) {
                 if (err) {

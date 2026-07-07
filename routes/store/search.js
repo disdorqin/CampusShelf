@@ -1,128 +1,68 @@
 const express = require('express');
 const router = express.Router();
-const authenticationMiddleware = require('../../config/authentication/middleware');
 const functions = require('../../utilities/functions');
+const cache = require('../../utilities/cache');
+const { CATEGORIES } = require('../../utilities/campusConstants');
+const { decorateList } = require('../../utilities/viewModel');
 
 const data = require('../../data');
-const searchAPI = data.search;
+const resourceAPI = data.resources;
+const wantedAPI = data.wanted;
 const userAPI = data.users;
+const orderAPI = data.orders;
+const commentAPI = data.comments;
 
-// Defualt landing page, returns *
+// Landing page: hero + stats + categories + hot + latest + free + wanted + steps
 router.get("/", async(req, res) => {
-    let authData = functions.isUserAuthenticated(req.user);
-    let categories = await searchAPI.getCategories();
+  const authData = functions.isUserAuthenticated(req.user);
 
-    await searchAPI.searchForBooks("*")
-        .then((result) => {
-            res.render("store/landingPage/static", {
-                authData: authData,
-                pageTitle: "Bookstore",
-                categories: categories,
-                result: result
-            });
-        })
-        .catch((error) => {
-            res.render("error/static", {
-                error
-            });
-        });
+  try {
+    const hot = await cache.cacheGet('campusshelf:hot-resources', 300, () =>
+      resourceAPI.getHotResources(8)
+    );
+    const all = resourceAPI.listResources({ status: 'approved', sort: 'newest' });
+    const latest = all.slice(0, 8);
+    const free = all.filter(r => Number(r.price) === 0).slice(0, 4);
+    const wanted = wantedAPI.getRecent(4);
+
+    const userCount = userAPI.listUsers().length;
+    const orderCount = orderAPI.countByStatus().total;
+    const approvalRate = 98; // mock value
+
+    const counts = resourceAPI.countByCategory();
+    const categories = CATEGORIES.map(c => ({
+      ...c,
+      count: counts[c.key] || 0
+    }));
+    const totalResources = Object.values(counts).reduce((a, b) => a + b, 0);
+
+    res.render("store/landingPage/static", {
+      authData,
+      pageTitle: "CampusShelf 校园学习资源交易平台",
+      categories,
+      hotResources: decorateList(hot.value),
+      latestResources: decorateList(latest),
+      freeResources: decorateList(free),
+      wanted,
+      stats: {
+        resources: totalResources,
+        users: userCount,
+        orders: orderCount,
+        approval: approvalRate
+      }
+    });
+  } catch (error) {
+    res.render("error/static", { error });
+  }
 });
 
-// Search for a book based on isbn
-router.get("/search/isbn/:isbn", async(req, res) => {
-    let authData = functions.isUserAuthenticated(req.user);
-    let isbn = req.params.isbn;
-    if (!isbn) throw {
-        "route": "/search/isbn",
-        "error:": "ISBN was null"
-    };
-
-    await searchAPI.searchByISBN(isbn)
-        .then((result) => {
-            res.render("store/bookView/static", {
-                authData: authData,
-                pageTitle: result[0].title,
-                result: result[0]
-            });
-        })
-        .catch(error => res.status(500).json({
-            error: error
-        }));
-});
-
-// Search for books based on titles
-router.get("/search/:bookTitle", async(req, res) => {
-    let authData = functions.isUserAuthenticated(req.user);
-    let bookTitle = req.params.bookTitle;
-    if (!bookTitle) throw {
-        "route": "/search/:bookTitle",
-        "error:": "Book title was null"
-    };
-
-    let categories = await searchAPI.getCategories();
-
-    await searchAPI.searchForBooks(bookTitle)
-        .then((result) => {
-            res.render("store/landingPage/static", {
-                authData: authData,
-                pageTitle: "Search Results: " + bookTitle,
-                categories: categories,
-                result: result
-            });
-        })
-        .catch(error => res.status(500).json({
-            error: error
-        }));
-});
-
-// Search for books based on category
-router.get("/category/:category", async(req, res) => {
-    let authData = functions.isUserAuthenticated(req.user);
-    let category = req.params.category;
-    if (!category) throw {
-        "route": "/category/:category",
-        "error:": "Category was null"
-    };
-
-    let categories = await searchAPI.getCategories();
-
-    await searchAPI.searchByCategory(category)
-        .then((result) => {
-            res.render("store/landingPage/static", {
-                authData: authData,
-                pageTitle: "Category: " + category,
-                categories: categories,
-                result: result
-            });
-        })
-        .catch(error => res.status(500).json({
-            error: error
-        }));
-});
-
-// Post query when user searches for a book title
-router.post("/search", async(req, res) => {
-    let bookTitle = req.body.bookTitle;
-
-    if (bookTitle) {
-        res.redirect("/search/" + bookTitle);
-    } else {
-        res.end(); // Don't do anything
-    }
-});
-
-// Post query when user adds a book to their cart
-router.post("/addToCart/:isbn", authenticationMiddleware, async(req, res, next) => {
-    let isbn = req.params.isbn;
-    let user = req.user;
-
-    let book = await searchAPI.searchByISBN(isbn);
-    let updateStatus = await userAPI.addToCart(user.email, book);
-
-    // Redirect back to the main page and show that adding to cart was successful
-    if (updateStatus) {
-        res.redirect("/user/shoppingCart");
-    }
+// Search box submits here -> list page.
+router.post("/search", (req, res) => {
+  const kw = (req.body.keyword || '').trim();
+  const params = new URLSearchParams();
+  if (kw) params.set('keyword', kw);
+  if (req.body.category) params.set('category', req.body.category);
+  res.redirect('/resources?' + params.toString());
 });
 
 module.exports = router;

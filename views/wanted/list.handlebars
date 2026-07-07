@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="page-header">
+    <div>
+      <div class="page-pretitle">CampusShelf</div>
+      <h1>💬 校园求购墙</h1>
+    </div>
+    <div class="page-actions">
+      <a href="/resources/publish" class="btn btn-primary">📤 发布资源</a>
+    </div>
+  </div>
+
+  <p style="color:var(--text-secondary);margin-bottom:24px;font-size:14px">
+    同学们正在求购这些资料和用品，如有闲置可以联系他们！
+  </p>
+
+  {{#if posts.length}}
+  <div class="wanted-grid">
+    {{#each posts}}
+    <div class="wanted-card">
+      <div class="title">📋 {{title}}</div>
+      <div class="meta">
+        <span class="badge badge-gray">📍 {{campus}}</span>
+        <span class="badge badge-gray">📖 {{courseName}}</span>
+        <span>👤 {{posterName}}</span>
+        <span>📅 {{createdAt}}</span>
+      </div>
+      <div class="budget">💰 预算 ¥{{budget}}</div>
+      <div class="desc">{{description}}</div>
+      {{#if contact}}
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;color:var(--text-secondary)">
+        📞 联系：{{contact}}
+      </div>
+      {{/if}}
+    </div>
+    {{/each}}
+  </div>
+  {{else}}
+  <div class="empty-state">
+    <div class="icon">💬</div>
+    <h3>暂无求购信息</h3>
+    <p>稍后再来看看吧</p>
+  </div>
+  {{/if}}
+</div>

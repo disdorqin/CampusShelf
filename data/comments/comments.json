@@ -1,0 +1,50 @@
+[
+  {
+    "id": "5b32fdb2-1ca1-4fd3-9a63-acfa9752911b",
+    "resourceId": "d6c63a3d-ac99-4787-ad91-62109dcd1dca",
+    "userName": "学妹小白",
+    "text": "资料很新，和描述一致，推荐！",
+    "rating": 5,
+    "createdAt": "2026-07-06T06:08:38.968Z"
+  },
+  {
+    "id": "f006a482-aa27-412c-ba59-30ea878e0c62",
+    "resourceId": "03f27842-2f5a-4bdc-aef9-bc03feb1ebbb",
+    "userName": "考研党阿强",
+    "text": "内容详实，对我帮助很大。",
+    "rating": 4,
+    "createdAt": "2026-07-05T06:08:38.968Z"
+  },
+  {
+    "id": "799b9ac1-8b4a-4930-95d2-c4878ad9bc4f",
+    "resourceId": "463936c6-7e2d-4af9-9fc3-8404f4ab795a",
+    "userName": "匿名用户",
+    "text": "发货快，沟通顺畅。",
+    "rating": 5,
+    "createdAt": "2026-07-04T06:08:38.968Z"
+  },
+  {
+    "id": "ef39ee8e-e330-495e-a2e4-90284c692f38",
+    "resourceId": "e2f60e44-a141-44d5-9d95-848bae7a11a3",
+    "userName": "学妹小白",
+    "text": "资料很新，和描述一致，推荐！",
+    "rating": 5,
+    "createdAt": "2026-07-03T06:08:38.968Z"
+  },
+  {
+    "id": "59a0fb91-a03b-46a5-952a-098d0c9d2514",
+    "resourceId": "9965c40a-6494-40b1-969a-18c141718340",
+    "userName": "考研党阿强",
+    "text": "内容详实，对我帮助很大。",
+    "rating": 4,
+    "createdAt": "2026-07-02T06:08:38.968Z"
+  },
+  {
+    "id": "795c7ac5-09b1-4cce-8eb4-aca22f2a46c1",
+    "resourceId": "4dcd9f33-d57d-4399-af22-aff74a1e63e7",
+    "userName": "匿名用户",
+    "text": "发货快，沟通顺畅。",
+    "rating": 5,
+    "createdAt": "2026-07-01T06:08:38.968Z"
+  }
+]

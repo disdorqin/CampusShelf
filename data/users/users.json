@@ -1,0 +1,60 @@
+[
+  {
+    "_id": "7f24ee06-075a-475c-a539-d508dbfcd86c",
+    "firstName": "Admin",
+    "lastName": "",
+    "email": "admin@campusshelf.com",
+    "password": "$2a$10$pK99gF.L1XtRE1QGqQXAl.iAN5j7aC9P6DPYw2H64VvgAGNfPlKza",
+    "shoppingCart": [],
+    "purchases": [],
+    "favorites": [],
+    "isAdmin": true
+  },
+  {
+    "_id": "d67fc009-7bb4-4e66-b50d-eac7fe15e7bd",
+    "firstName": "Demo",
+    "lastName": "Student",
+    "email": "student@campusshelf.com",
+    "password": "$2a$10$Vt2G4ANL6fqoZTL3aE.1OedjQXAA.fx5kI0qLwfDWNqghwbVqhuri",
+    "shoppingCart": [],
+    "purchases": [
+      {
+        "book": {
+          "isbn": "60be8480-8434-40ea-8634-31d8c9f1aed8",
+          "title": "《算法导论》中文PDF电子版",
+          "price": 5,
+          "imageURL": {
+            "thumbnail": "/img/cat-ebook.svg"
+          },
+          "category": "ebook",
+          "quantity": 1,
+          "datePurchased": "July 7th 2026"
+        }
+      }
+    ],
+    "favorites": [
+      "0f841061-8c38-4d2c-beca-608be3866800"
+    ],
+    "isAdmin": false
+  },
+  {
+    "_id": "f3aac628-e843-45e9-a333-8a4117090517",
+    "firstName": "��",
+    "lastName": "�û�",
+    "email": "newuser@test.com",
+    "password": "$2a$10$s3Bw1AMcJEfYgNh3O3DLAuRwY/Pj1aYTnd8YvqyJcyDGjM3YPOjJK",
+    "shoppingCart": [],
+    "purchases": [],
+    "favorites": []
+  },
+  {
+    "_id": "e8f3604e-c918-47cb-895a-1835b5ebf4ac",
+    "firstName": "%D0%C2",
+    "lastName": "%D3%C3%BB%A7",
+    "email": "another@test.com",
+    "password": "$2a$10$cFl/U9psS6M//cdM7AiE6.HmS9cAxX9A.08qgWTemwdr6DkYqon1W",
+    "shoppingCart": [],
+    "purchases": [],
+    "favorites": []
+  }
+]

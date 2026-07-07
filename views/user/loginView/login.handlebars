@@ -1,25 +1,23 @@
-<div class="container topBottomOffset">
-    <div class="col-lg-8 col-centered">
-        {{#if error}}
-        <div class="alert alert-danger">
-            {{error}}
-        </div>
-        {{/if}}
-
-        <form action="/login" method="post" id="commentForm">
-            <div class="form-group">
-                <label for="username">UserName</label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-            </div>
-            <div class="g-recaptcha" data-sitekey="6LenlzwUAAAAAKBk8UklktCmS5Tl90ZOLi-qG1vo"></div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <br>
-        </form>
+<div class="form-wrap" style="max-width:420px">
+  <h2 style="text-align:center">👋 欢迎回来</h2>
+  <p style="text-align:center;color:var(--muted)">登录 CampusShelf 校园资源平台</p>
+  {{#if error}}<div class="alert alert-error">{{error}}</div>{{/if}}
+  <form method="post" action="/login">
+    <div class="field">
+      <label>邮箱</label>
+      <input type="text" name="username" placeholder="you@campus.edu" required>
     </div>
+    <div class="field">
+      <label>密码</label>
+      <input type="password" name="password" placeholder="••••••" required>
+    </div>
+    <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">登录</button>
+  </form>
+  <p style="text-align:center;margin-top:16px;color:var(--muted)">
+    还没有账号？<a href="/register" style="color:var(--primary);font-weight:700">立即注册</a>
+  </p>
+  <p style="text-align:center;color:var(--muted);font-size:13px">
+    演示账号：admin@campusshelf.com / admin123（管理员）<br>
+    student@campusshelf.com / student123（普通用户）
+  </p>
 </div>
-
-<script src='https://www.google.com/recaptcha/api.js'></script>

@@ -1,66 +1,146 @@
-<header>
-    <div class="splash">
-        <h1 class="jumbotron-heading">Chapter One</h1>
-        <p class="lead text-muted">All Stories Begin with Chapter One</p>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <h1>CampusShelf 校园学习资源交易平台</h1>
+    <p class="hero-subtitle">二手教材、课程笔记、考研资料、实验报告、电子书、学习用品 — 一站式校园资源共享，让知识在校园里传递</p>
+    <div class="hero-search-wrap">
+      <input id="globalSearch" type="text" placeholder="搜索教材、课程、资料、关键词…">
+      <button onclick="window.location.href='/resources?keyword='+encodeURIComponent(document.getElementById('globalSearch').value)">🔍 搜索</button>
     </div>
-</header>
-
-<div class="container">
-    <div class="col-lg-12 searchBar">
-        <form action="/search" method="post" id="searchForm">
-            <div class="input-group">
-                <label class="sr-only" for="searchBookTitle">Search for a book title...</label>
-                <input type="text" class="form-control" name="bookTitle" id="searchBookTitle" placeholder="Search for a book title...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit">Search</button>
-                </span>
-            </div>
-        </form>
-        <!-- /input-group -->
+    <div class="search-history" id="searchHistory"></div>
+    <div class="hero-hot-tags">
+      <span style="font-size:12px;opacity:0.7;margin-right:4px">🔥 热门搜索：</span>
+      <a href="/resources?keyword=高等数学">高等数学</a>
+      <a href="/resources?keyword=考研">考研资料</a>
+      <a href="/resources?keyword=Python">Python</a>
+      <a href="/resources?keyword=六级">英语六级</a>
+      <a href="/resources?keyword=数据结构">数据结构</a>
+      <a href="/resources?keyword=免费">免费领取</a>
     </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">{{stats.resources}}+</div><div class="hero-stat-label">📦 资源总数</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">{{stats.users}}+</div><div class="hero-stat-label">👥 注册用户</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">{{stats.orders}}+</div><div class="hero-stat-label">🤝 成功交易</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">{{stats.approval}}%</div><div class="hero-stat-label">⭐ 好评率</div></div>
+    </div>
+  </div>
+</section>
 
-    <div class="row">
-        <div class="col-lg-2">
-            <div class="list-group">
-                {{#each categories}}
-                <a href="/Category/{{this}}" class="list-group-item">{{this}}</a>
-                {{/each}}
-            </div>
+<!-- Category Entry Section -->
+<section class="section">
+  <div class="container">
+    <div class="section-head"><h2><span class="section-icon">📂</span> 资源分类</h2><a href="/resources" class="btn btn-ghost">查看全部 →</a></div>
+    <div class="cat-cards">
+      {{#each categories}}
+      <a href="/resources?category={{key}}" class="cat-card" style="--cat-color:{{color}}">
+        <span class="cat-card-icon">{{icon}}</span>
+        <div class="cat-card-name">{{label}}</div>
+        <div class="cat-card-count">{{count}} 件资源</div>
+        <div class="cat-card-desc">{{description}}</div>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<!-- Hot Resources -->
+{{#if hotResources.length}}
+<section class="section section-sm">
+  <div class="container">
+    <div class="section-head"><h2><span class="section-icon">🔥</span> 今日推荐</h2><a href="/resources?sort=views" class="btn btn-ghost">更多 →</a></div>
+    <div class="grid grid-cards">{{#each hotResources}}{{> resourceCard}}{{/each}}</div>
+  </div>
+</section>
+{{/if}}
+
+<!-- Latest Resources -->
+{{#if latestResources.length}}
+<section class="section section-sm">
+  <div class="container">
+    <div class="section-head"><h2><span class="section-icon">🆕</span> 最新上架</h2><a href="/resources?sort=newest" class="btn btn-ghost">更多 →</a></div>
+    <div class="grid grid-cards">{{#each latestResources}}{{> resourceCard}}{{/each}}</div>
+  </div>
+</section>
+{{/if}}
+
+<!-- Free Resources Section -->
+{{#if freeResources.length}}
+<section class="section section-sm">
+  <div class="container">
+    <div class="section-head"><h2><span class="section-icon">🎁</span> 免费赠送专区</h2><a href="/resources?maxPrice=0" class="btn btn-ghost">更多 →</a></div>
+    <p style="font-size:13px;color:var(--text-muted);margin:-16px 0 20px">学长学姐免费赠送，只需要你出邮费或者自取即可！</p>
+    <div class="free-grid">
+      {{#each freeResources}}
+      <a href="/resources/{{id}}" class="free-card">
+        <span class="icon">{{categoryIcon}}</span>
+        <div class="title">{{title}}</div>
+        <div class="free-label">🎉 免费领取</div>
+        <div class="campus">📍 {{campus}}</div>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{/if}}
+
+<!-- Wanted Section -->
+{{#if wanted.length}}
+<section class="section section-sm">
+  <div class="container">
+    <div class="section-head"><h2><span class="section-icon">💬</span> 校园求购墙</h2><a href="/wanted" class="btn btn-ghost">查看全部 →</a></div>
+    <p style="font-size:13px;color:var(--text-muted);margin:-16px 0 20px">同学们正在求购这些资料，如有闲置可以联系他们！</p>
+    <div class="wanted-grid">
+      {{#each wanted}}
+      <div class="wanted-card">
+        <div class="title">📋 {{title}}</div>
+        <div class="meta">
+          <span class="badge badge-gray">📍 {{campus}}</span>
+          <span class="badge badge-gray">📖 {{courseName}}</span>
+          <span>👤 {{posterName}}</span>
+          <span>📅 {{createdAt}}</span>
         </div>
-
-        <div class="col-lg-10">
-            <div class="row">
-                {{#each result}}
-                <div class="col-lg-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                        <a href="/search/isbn/{{isbn}}">
-                            <img class="card-img-top" src={{imageURL.thumbnail}} alt="{{title}}">
-                        </a>
-                        <div class="card-body">
-                            <p class="h3 card-title">
-                                <a href="/search/isbn/{{isbn}}">{{title}}</a>
-                            </p>
-                            <p class="h4">${{price}}</p>
-                        </div>
-                        <div class="card-footer">
-                            <div id="accordion" data-children=".item">
-                                <div class="item">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#{{_uuid}}" aria-expanded="true" aria-controls="{{_uuid}}">
-                                        View Description Snippet
-                                    </a>
-                                    <div id="{{_uuid}}" class="collapse" role="tabpanel">
-                                        <p class="mb-3">
-                                            {{textSnippet}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{/each}}
-            </div>
-        </div>
-
+        <div class="budget">💰 预算 ¥{{budget}}</div>
+        <div class="desc">{{description}}</div>
+      </div>
+      {{/each}}
     </div>
+  </div>
+</section>
+{{/if}}
+
+<!-- Transaction Steps -->
+<section class="section section-sm">
+  <div class="container">
+    <div class="section-head"><h2><span class="section-icon">📋</span> 交易流程</h2></div>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h4>📤 发布资源</h4>
+        <p>上传教材、笔记或用品信息，填写详细描述和价格</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h4>✅ 平台审核</h4>
+        <p>管理员审核信息真实性后自动上架展示</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h4>💬 联系卖家</h4>
+        <p>通过平台信息联系卖家，约定线下交易</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h4>⭐ 评价反馈</h4>
+        <p>交易成功后为资源评分评论，帮助其他同学</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Recent Views -->
+<div id="recentViewSection" class="section section-sm" style="display:none">
+  <div class="container">
+    <div class="section-head"><h2><span class="section-icon">👁️</span> 最近浏览</h2></div>
+    <div class="recent-scroll" id="recentScroll"></div>
+  </div>
 </div>

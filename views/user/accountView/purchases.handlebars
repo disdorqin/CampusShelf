@@ -1,38 +1,14 @@
-<div class="container topBottomOffset">
-    {{#if purchases}}
-    <div class="center">
-        <div class="container py-3">
-            {{#each purchases}}
-            <div class="card" style="margin-bottom: 20px">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="{{this.book.imageURL.thumbnail}}" class="w-100" alt="{{this.book.title}}">
-                    </div>
-
-                    <div class="col-md-8 px-3">
-                        <div class="card-block px-3">
-                            <p class="h4 card-title">{{this.book.title}}</p>
-                            <p class="card-text">
-                                <small>{{this.book.description}}</small>
-                            </p>
-                            <p class="lead">Purchased: {{this.book.datePurchased}}</p>
-                            <p class="lead">Quantity: {{this.book.quantity}}</p>
-                            <p class="lead">Price: ${{this.book.price}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{/each}}
-        </div>
+<section class="section" style="margin-top:28px;max-width:820px">
+  <div class="section-head"><h2>📦 购买记录</h2></div>
+  {{#if purchases.length}}
+    <div class="filters" style="box-shadow:none">
+    {{#each purchases}}
+      <div style="padding:10px 0;border-bottom:1px dashed var(--border)">
+        {{#each this.book}}<div>📘 {{this.title}} · <span style="color:var(--danger)">¥{{this.price}}</span> · {{this.datePurchased}}</div>{{/each}}
+      </div>
+    {{/each}}
     </div>
-    {{else}}
-    <div class="center">
-        <div class="container py-3">
-            <p class="h2">No purchases to show</p>
-            <a href="/" class="btn btn-primary btn-lg">
-                <span class="glyphicon glyphicon-home"></span>
-                Search for Books </a>
-        </div>
-    </div>
-    {{/if}}
-</div>
+  {{else}}
+    <div class="alert alert-error">还没有购买记录。</div>
+  {{/if}}
+</section>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../public/img/book.ico">
+
+    <title>Bookstore</title>
+
+    <!-- Add Bootstrap library -->
+    <link rel="stylesheet" href="../../public/css/bootstrap/css/bootstrap.min.css">
+
+    <!-- Add custom css -->
+    <link rel="stylesheet" href="../../public/css/stylesheet.css">
+
+    <!-- Add icon library -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Chapter One</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Content -->
+    <header>
+    <div class="splash">
+        <h1 class="jumbotron-heading">Chapter One</h1>
+        <p class="lead text-muted">All Stories Begin with Chapter One</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="col-lg-12 searchBar">
+        <form action="/search" method="post" id="searchForm">
+            <div class="input-group">
+                <label class="sr-only" for="searchBookTitle">Search for a book title...</label>
+                <input type="text" class="form-control" name="bookTitle" id="searchBookTitle" placeholder="Search for a book title...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </span>
+            </div>
+        </form>
+        <!-- /input-group -->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="list-group">
+                <a href="/Category/Fiction" class="list-group-item">Fiction</a>
+                <a href="/Category/Science" class="list-group-item">Science</a>
+                <a href="/Category/Technology" class="list-group-item">Technology</a>
+                <a href="/Category/History" class="list-group-item">History</a>
+                <a href="/Category/Art" class="list-group-item">Art</a>
+                <a href="/Category/Business" class="list-group-item">Business</a>
+            </div>
+        </div>
+
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780132350884">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780132350884-M.jpg alt="Clean Code: A Handbook of Agile Software Craftsmanship">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780132350884">Clean Code: A Handbook of Agile Software Craftsmanship</a>
+                            </p>
+                            <p class="h4">$42</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#b3af90b8-c8a9-4d2c-8d6d-d0e5b74e48ac" aria-expanded="true" aria-controls="b3af90b8-c8a9-4d2c-8d6d-d0e5b74e48ac">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="b3af90b8-c8a9-4d2c-8d6d-d0e5b74e48ac" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            Even bad code can function. But if code isn&#x27;t clean, it can bring a development...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780201616224">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780201616224-M.jpg alt="The Pragmatic Programmer: Your Journey to Mastery">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780201616224">The Pragmatic Programmer: Your Journey to Mastery</a>
+                            </p>
+                            <p class="h4">$39</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#f146334b-61ee-4498-bf6a-ba3b8b126288" aria-expanded="true" aria-controls="f146334b-61ee-4498-bf6a-ba3b8b126288">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="f146334b-61ee-4498-bf6a-ba3b8b126288" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            The Pragmatic Programmer is one of those rare tech books you&#x27;ll read, re-read, ...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780262033848">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780262033848-M.jpg alt="Introduction to Algorithms">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780262033848">Introduction to Algorithms</a>
+                            </p>
+                            <p class="h4">$78</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#f21e4f37-06de-4cdb-b3f4-293bb63388ec" aria-expanded="true" aria-controls="f21e4f37-06de-4cdb-b3f4-293bb63388ec">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="f21e4f37-06de-4cdb-b3f4-293bb63388ec" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            A comprehensive update of the leading algorithms text, with new material on mat...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780062316097">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780062316097-M.jpg alt="Sapiens: A Brief History of Humankind">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780062316097">Sapiens: A Brief History of Humankind</a>
+                            </p>
+                            <p class="h4">$25</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#63622314-04a4-4ea2-a220-33f526941807" aria-expanded="true" aria-controls="63622314-04a4-4ea2-a220-33f526941807">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="63622314-04a4-4ea2-a220-33f526941807" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            A sweeping account of how an insignificant ape became the ruler of planet Earth...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780743273565">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780743273565-M.jpg alt="The Great Gatsby">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780743273565">The Great Gatsby</a>
+                            </p>
+                            <p class="h4">$12</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#330118e7-046a-47b0-a5ab-1e507c906520" aria-expanded="true" aria-controls="330118e7-046a-47b0-a5ab-1e507c906520">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="330118e7-046a-47b0-a5ab-1e507c906520" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            The story of the mysteriously wealthy Jay Gatsby and his love for the beautiful...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780061120084">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780061120084-M.jpg alt="To Kill a Mockingbird">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780061120084">To Kill a Mockingbird</a>
+                            </p>
+                            <p class="h4">$14</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#6b84e20c-917d-41c7-a93f-e916811dd018" aria-expanded="true" aria-controls="6b84e20c-917d-41c7-a93f-e916811dd018">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="6b84e20c-917d-41c7-a93f-e916811dd018" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            A gripping, heart-wrenching, and wholly remarkable tale of coming-of-age in a S...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780553380163">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780553380163-M.jpg alt="A Brief History of Time">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780553380163">A Brief History of Time</a>
+                            </p>
+                            <p class="h4">$18</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#62859b6b-bbca-475e-af2a-b752400c95ea" aria-expanded="true" aria-controls="62859b6b-bbca-475e-af2a-b752400c95ea">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="62859b6b-bbca-475e-af2a-b752400c95ea" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            From the Big Bang to black holes, the author attempts to explain a range of sub...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780307887894">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780307887894-M.jpg alt="The Lean Startup">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780307887894">The Lean Startup</a>
+                            </p>
+                            <p class="h4">$22</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#2f7cbd13-521e-4e05-b3d4-343686078349" aria-expanded="true" aria-controls="2f7cbd13-521e-4e05-b3d4-343686078349">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="2f7cbd13-521e-4e05-b3d4-343686078349" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            How today&#x27;s entrepreneurs use continuous innovation to create radically success...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780066620992">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780066620992-M.jpg alt="Good to Great: Why Some Companies Make the Leap... and Others Don&#x27;t">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780066620992">Good to Great: Why Some Companies Make the Leap... and Others Don&#x27;t</a>
+                            </p>
+                            <p class="h4">$27</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#1f08207d-0dd3-435b-8c20-714444de9257" aria-expanded="true" aria-controls="1f08207d-0dd3-435b-8c20-714444de9257">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="1f08207d-0dd3-435b-8c20-714444de9257" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            Built to Last, the defining management study of the nineties, showed how great ...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9781599869773">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9781599869773-M.jpg alt="The Art of War">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9781599869773">The Art of War</a>
+                            </p>
+                            <p class="h4">$8</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#892a3ede-7b3c-4acd-80b4-63e1a6544c2b" aria-expanded="true" aria-controls="892a3ede-7b3c-4acd-80b4-63e1a6544c2b">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="892a3ede-7b3c-4acd-80b4-63e1a6544c2b" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            An ancient Chinese military treatise attributed to Sun Tzu, still studied by mi...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780374533557">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780374533557-M.jpg alt="Thinking, Fast and Slow">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780374533557">Thinking, Fast and Slow</a>
+                            </p>
+                            <p class="h4">$21</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#44615a3c-e9b1-40a2-9048-2a8838c97501" aria-expanded="true" aria-controls="44615a3c-e9b1-40a2-9048-2a8838c97501">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="44615a3c-e9b1-40a2-9048-2a8838c97501" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            The phenomenal international best seller that reveals how our two systems of th...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/search/isbn/9780451524935">
+                            <img class="card-img-top" src=https://covers.openlibrary.org/b/isbn/9780451524935-M.jpg alt="1984">
+                        </a>
+                        <div class="card-body">
+                            <p class="h3 card-title">
+                                <a href="/search/isbn/9780451524935">1984</a>
+                            </p>
+                            <p class="h4">$10</p>
+                        </div>
+                        <div class="card-footer">
+                            <div id="accordion" data-children=".item">
+                                <div class="item">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#79904766-34e0-4b1f-b708-7210af6fe8e5" aria-expanded="true" aria-controls="79904766-34e0-4b1f-b708-7210af6fe8e5">
+                                        View Description Snippet
+                                    </a>
+                                    <div id="79904766-34e0-4b1f-b708-7210af6fe8e5" class="collapse" role="tabpanel">
+                                        <p class="mb-3">
+                                            A dystopian social science fiction novel and cautionary tale about the dangers ...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-3 bg-dark footer">
+        <div class="container">
+    
+            <div class="row text-white">
+                <div class="col">
+                    <ul>
+                        <li>Developer:
+                            <strong>Julio Lockhart</strong>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/juliolockhart/">LinkedIn</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/julio-lockhart/Bookstore">Source Code</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <p class="m-0 text-center text-white">Copyright &copy; Julio Lockhart 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+    <script src="../../public/js/functions.js"></script>
+</body>
+
+</html>

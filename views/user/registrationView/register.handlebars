@@ -1,44 +1,28 @@
-<div class="container">
-
-    <div class="center topBottomOffset">
-
-        {{#if error}}
-        <div class="alert alert-danger">
-            {{error}}
-        </div>
-        {{/if}}
-
-        <form method="post" action="/register" id="registrationFormID">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <label for="firstNameInput">First Name</label>
-                        <input type="text" name="firstNameInput" id="firstNameInput" class="form-control input-lg" placeholder="Enter First Name"
-                            tabindex="1" required>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <label for="lastNameInput">Last Name</label>
-                        <input type="text" name="lastNameInput" id="lastNameInput" class="form-control input-lg" placeholder="Enter Last Name" tabindex="2"
-                            required>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="emailInput">Email address</label>
-                <input type="email" class="form-control" name="emailInput" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email"
-                    tabindex="3" required>
-            </div>
-            <div class="form-group">
-                <label for="passwordInput">Password</label>
-                <input type="password" class="form-control" name="passwordInput" id="passwordInput" placeholder="Password" tabindex="4" minlength="8"
-                    aria-describedby="passwordHelpInline" required>
-                <small id="passwordHelpInline">
-                    Must be minimum 8 characters long.
-                </small>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+<div class="form-wrap" style="max-width:480px">
+  <h2 style="text-align:center">🎉 创建账号</h2>
+  {{#if error}}<div class="alert alert-error">{{error}}</div>{{/if}}
+  <form method="post" action="/register">
+    <div class="row2">
+      <div class="field">
+        <label>名</label>
+        <input name="firstNameInput" placeholder="名" required>
+      </div>
+      <div class="field">
+        <label>姓</label>
+        <input name="lastNameInput" placeholder="姓">
+      </div>
     </div>
+    <div class="field">
+      <label>邮箱</label>
+      <input type="email" name="emailInput" placeholder="you@campus.edu" required>
+    </div>
+    <div class="field">
+      <label>密码</label>
+      <input type="password" name="passwordInput" placeholder="至少 6 位" required minlength="6">
+    </div>
+    <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">注册并登录</button>
+  </form>
+  <p style="text-align:center;margin-top:16px;color:var(--muted)">
+    已有账号？<a href="/login" style="color:var(--primary);font-weight:700">去登录</a>
+  </p>
 </div>

@@ -1,0 +1,19 @@
+[
+  {
+    "id": "ff3872e3-888b-42d3-9f6e-b0d5078c1283",
+    "userId": "d67fc009-7bb4-4e66-b50d-eac7fe15e7bd",
+    "userName": "student@campusshelf.com",
+    "items": [
+      {
+        "resourceId": "60be8480-8434-40ea-8634-31d8c9f1aed8",
+        "title": "《算法导论》中文PDF电子版",
+        "price": 5,
+        "quantity": 1
+      }
+    ],
+    "total": 5,
+    "status": "pending",
+    "createdAt": "2026-07-07T06:14:16.864Z",
+    "updatedAt": "2026-07-07T06:14:16.864Z"
+  }
+]

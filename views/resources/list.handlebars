@@ -1,0 +1,115 @@
+<div class="container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="page-pretitle">校园集市</div>
+      <h1>{{#if filters.keyword}}搜索"{{filters.keyword}}"{{else}}全部资源{{/if}}</h1>
+    </div>
+    <div class="page-actions">
+      <a href="/resources/publish" class="btn btn-primary">📤 发布资源</a>
+    </div>
+  </div>
+
+  <div class="list-layout">
+    <!-- Left Sidebar: Filters -->
+    <aside class="filter-panel">
+      <h3>🔍 筛选条件</h3>
+
+      <form id="filterForm" method="get" action="/resources">
+        <input type="hidden" name="keyword" value="{{filters.keyword}}">
+
+        <!-- Category -->
+        <div class="filter-group">
+          <label>📂 分类</label>
+          <select name="category" onchange="this.form.submit()">
+            <option value="all" {{#if (eq filters.category "all")}}selected{{/if}}>全部分类</option>
+            {{#each categories}}
+            <option value="{{key}}" {{#if (eq ../filters.category key)}}selected{{/if}}>{{label}} ({{count}})</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <!-- Condition -->
+        <div class="filter-group">
+          <label>📊 成色</label>
+          <select name="condition" onchange="this.form.submit()">
+            <option value="all" {{#if (eq filters.condition "all")}}selected{{/if}}>全部成色</option>
+            {{#each conditionOptions}}
+            <option value="{{this}}" {{#if (eq ../filters.condition this)}}selected{{/if}}>{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <!-- Price Range -->
+        <div class="filter-group">
+          <label>💰 价格区间</label>
+          <div class="price-range">
+            <input type="number" name="minPrice" placeholder="¥ 最低" value="{{filters.minPrice}}">
+          </div>
+          <div class="price-range" style="margin-top:6px">
+            <input type="number" name="maxPrice" placeholder="¥ 最高" value="{{filters.maxPrice}}">
+          </div>
+        </div>
+
+        <!-- Checkboxes -->
+        <div class="filter-group">
+          <label>⚙️ 其他条件</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="free" value="1" {{#if filters.free}}checked{{/if}} onchange="this.form.submit()"> 仅看免费资源</label>
+            <label><input type="checkbox" name="negotiable" value="1" {{#if filters.negotiable}}checked{{/if}} onchange="this.form.submit()"> 可议价</label>
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <a href="/resources" class="btn btn-ghost btn-sm" style="flex:1;justify-content:center">🔄 重置</a>
+          <button type="submit" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">应用筛选</button>
+        </div>
+      </form>
+    </aside>
+
+    <!-- Right: Results -->
+    <main>
+      <!-- Search Summary & Chips -->
+      <div class="filter-chips">
+        {{#if filters.keyword}}<span class="filter-chip">关键词: {{filters.keyword}} <span class="close" onclick="location.href='?category={{filters.category}}&condition={{filters.condition}}&minPrice={{filters.minPrice}}&maxPrice={{filters.maxPrice}}&sort={{filters.sort}}'" style="cursor:pointer">×</span></span>{{/if}}
+        {{#if (ne filters.category "all")}}<span class="filter-chip">{{getCategoryLabel filters.category}} <span class="close" onclick="location.href='?keyword={{filters.keyword}}&condition={{filters.condition}}&minPrice={{filters.minPrice}}&maxPrice={{filters.maxPrice}}&sort={{filters.sort}}'" style="cursor:pointer">×</span></span>{{/if}}
+        {{#if (ne filters.condition "all")}}<span class="filter-chip">{{filters.condition}} <span class="close" onclick="location.href='?keyword={{filters.keyword}}&category={{filters.category}}&minPrice={{filters.minPrice}}&maxPrice={{filters.maxPrice}}&sort={{filters.sort}}'" style="cursor:pointer">×</span></span>{{/if}}
+        {{#if filters.minPrice}}<span class="filter-chip">≥ ¥{{filters.minPrice}} <span class="close" onclick="location.href='?keyword={{filters.keyword}}&category={{filters.category}}&condition={{filters.condition}}&maxPrice={{filters.maxPrice}}&sort={{filters.sort}}'" style="cursor:pointer">×</span></span>{{/if}}
+        {{#if filters.maxPrice}}<span class="filter-chip">≤ ¥{{filters.maxPrice}} <span class="close" onclick="location.href='?keyword={{filters.keyword}}&category={{filters.category}}&condition={{filters.condition}}&minPrice={{filters.minPrice}}&sort={{filters.sort}}'" style="cursor:pointer">×</span></span>{{/if}}
+        <a href="/resources" class="filter-chip" style="background:var(--accent-light);color:var(--accent);border-color:var(--accent);text-decoration:none">清空全部 ×</a>
+      </div>
+
+      <!-- Top Bar -->
+      <div class="list-top-bar">
+        <div class="result-count">共找到 <strong>{{pagination.total}}</strong> 条资源</div>
+        <div class="sort-group">
+          {{#each sortButtons}}
+          <a href="{{url}}" class="sort-btn {{#if active}}active{{/if}}">{{label}}</a>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Resource Grid -->
+      {{#if resources.length}}
+      <div class="grid grid-cards">
+        {{#each resources}}{{> resourceCard}}{{/each}}
+      </div>
+      {{else}}
+      <div class="empty-state">
+        <div class="icon">📭</div>
+        <h3>暂无匹配资源</h3>
+        <p>试试调整筛选条件或关键词</p>
+      </div>
+      {{/if}}
+
+      <!-- Pagination -->
+      {{#if (gt pagination.totalPages 1)}}
+      <div class="pagination">
+        {{#if pagination.hasPrev}}<a href="{{pagination.prevUrl}}">‹ 上一页</a>{{else}}<span class="disabled">‹ 上一页</span>{{/if}}
+        {{#each pagination.pages}}<a href="{{url}}" class="{{#if active}}active{{/if}}">{{n}}</a>{{/each}}
+        {{#if pagination.hasNext}}<a href="{{pagination.nextUrl}}">下一页 ›</a>{{else}}<span class="disabled">下一页 ›</span>{{/if}}
+      </div>
+      {{/if}}
+    </main>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<section class="section" style="margin-top:28px">
+  <div class="section-head">
+    <h2>👤 个人中心 · {{user.firstName}} {{user.lastName}}</h2>
+    <a class="btn btn-primary btn-sm" href="/resources/publish">+ 发布资源</a>
+  </div>
+
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+    <button class="btn btn-sm tab-btn {{#if (eq activeTab 'publish')}}btn-primary{{else}}btn-ghost{{/if}}" data-tab="publish">我的发布 ({{myPublish.length}})</button>
+    <button class="btn btn-sm tab-btn {{#if (eq activeTab 'favorite')}}btn-primary{{else}}btn-ghost{{/if}}" data-tab="favorite">我的收藏 ({{favorites.length}})</button>
+    <button class="btn btn-sm tab-btn {{#if (eq activeTab 'order')}}btn-primary{{else}}btn-ghost{{/if}}" data-tab="order">我的订单 ({{orders.length}})</button>
+    <button class="btn btn-sm tab-btn {{#if (eq activeTab 'recent')}}btn-primary{{else}}btn-ghost{{/if}}" data-tab="recent">最近浏览</button>
+  </div>
+
+  <!-- 我的发布 -->
+  <div class="tab-panel" id="tab-publish" style="{{#if (ne activeTab 'publish')}}display:none{{/if}}">
+    {{#if myPublish}}
+      <div class="grid">
+        {{#each myPublish}}
+          <div style="position:relative">
+            {{> resourceCard}}
+            <a class="btn btn-ghost btn-sm" style="margin-top:8px" href="/resources/{{this.id}}/edit">✏️ 编辑</a>
+          </div>
+        {{/each}}
+      </div>
+    {{else}}<p style="color:var(--muted)">还没有发布资源，<a href="/resources/publish" style="color:var(--primary)">去发布</a>。</p>{{/if}}
+  </div>
+
+  <!-- 我的收藏 -->
+  <div class="tab-panel" id="tab-favorite" style="{{#if (ne activeTab 'favorite')}}display:none{{/if}}">
+    {{#if favorites}}
+      <div class="grid">{{#each favorites}}{{> resourceCard}}{{/each}}</div>
+    {{else}}<p style="color:var(--muted)">还没有收藏任何资源。</p>{{/if}}
+  </div>
+
+  <!-- 我的订单 -->
+  <div class="tab-panel" id="tab-order" style="{{#if (ne activeTab 'order')}}display:none{{/if}}">
+    {{#if orders}}
+      <div class="filters" style="box-shadow:none">
+      <table class="table" style="color:var(--text)">
+        <thead><tr><th>订单号</th><th>商品</th><th>金额</th><th>状态</th><th>时间</th></tr></thead>
+        <tbody>
+          {{#each orders}}
+            <tr>
+              <td style="font-size:12px">{{this.id}}</td>
+              <td>{{#each this.items}}{{this.title}} ×{{this.quantity}}<br>{{/each}}</td>
+              <td><b>{{this.totalText}}</b></td>
+              <td><span class="badge" style="background:{{this.statusColor}};color:#0b1120">{{this.statusLabel}}</span></td>
+              <td style="font-size:12px">{{this.createdAt}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      </div>
+    {{else}}<p style="color:var(--muted)">还没有订单，去 <a href="/resources" style="color:var(--primary)">逛逛</a> 吧。</p>{{/if}}
+  </div>
+
+  <!-- 最近浏览 -->
+  <div class="tab-panel" id="tab-recent" style="{{#if (ne activeTab 'recent')}}display:none{{/if}}">
+    <div id="recentViews"><p style="color:var(--muted)">加载中…</p></div>
+  </div>
+</section>

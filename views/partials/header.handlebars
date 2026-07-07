@@ -1,41 +1,30 @@
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">Chapter One</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                {{#if authData.isLoggedIn}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/account">Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/shoppingCart">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/purchases">Purchases</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/logout">Sign Out</a>
-                </li>
-                {{else}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
-                </li>
-                {{/if}}
-            </ul>
-        </div>
+<header class="header">
+  <div class="container header-inner">
+    <a href="/" class="header-logo">
+      <img src="/images/logo.svg" alt="CampusShelf">
+      <span>CampusShelf</span>
+    </a>
+    <div class="header-search">
+      <span class="search-icon">🔍</span>
+      <input id="globalSearch" type="text" placeholder="搜索教材、课程、资料…">
+      <div id="liveResults"></div>
     </div>
-</nav>
+    <div class="header-actions">
+      <a href="/resources"><span>资源</span></a>
+      <a href="/wanted">💬 <span>求购</span></a>
+      <a href="/resources/publish">📤 <span>发布</span></a>
+      <a href="/user/shoppingCart">🛒 <span>购物车</span> {{#if authData.isLoggedIn}}<span class="cart-badge">{{cartCount}}</span>{{/if}}</a>
+      {{#if authData.isLoggedIn}}
+      <a href="/user/center">👤 <span>{{authData.user.firstName}}</span></a>
+      <a href="/user/logout">🚪</a>
+      {{else}}
+      <a href="/login"><span>登录</span></a>
+      <a href="/register"><span>注册</span></a>
+      {{/if}}
+      <button id="themeToggle" class="theme-toggle">🌙</button>
+    </div>
+  </div>
+</header>
+<!-- Compare bottom bar -->
+<div id="compareBar" class="compare-toggle-bar"></div>
+<div id="compareOverlay" class="compare-overlay"></div>
